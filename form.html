@@ -1,41 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" class=" antialiased">>
+    <meta charset="UTF-8" class="antialiased">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axis - form</title>
+    <title>Slime Molds Simulation</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="sketch.js" defer></script>
     <style>
         body { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #fff; }
-        input { margin: 5px; }
     </style>
 </head>
 <body>
-    <a href="/index.html">Home</a>
-    <div>
-        <label for="rating">Select Mold Density (1 to 5):</label>
-        <input type="number" id="rating" min="1" max="5" value="3" onchange="updateRating()">
+    <a href="/index.html" class="text-blue-500 underline mb-4">Home</a>
+    
+    <div class="space-y-4">
+        <div>
+            <h3 class="font-bold mb-2">Select Mold Density</h3>
+            <div class="flex gap-2">
+                <label><input type="radio" name="density" value="1" class="mr-2" onchange="updateValues()"> 1</label>
+                <label><input type="radio" name="density" value="2" class="mr-2" onchange="updateValues()"> 2</label>
+                <label><input type="radio" name="density" value="3" class="mr-2" onchange="updateValues()"> 3</label>
+                <label><input type="radio" name="density" value="4" class="mr-2" onchange="updateValues()"> 4</label>
+                <label><input type="radio" name="density" value="5" class="mr-2" onchange="updateValues()"> 5</label>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-bold mb-2">Select Mold Speed</h3>
+            <div class="flex gap-2">
+                <label><input type="radio" name="speed" value="1" class="mr-2" onchange="updateValues()"> 1</label>
+                <label><input type="radio" name="speed" value="2" class="mr-2" onchange="updateValues()"> 2</label>
+                <label><input type="radio" name="speed" value="3" class="mr-2" onchange="updateValues()"> 3</label>
+                <label><input type="radio" name="speed" value="4" class="mr-2" onchange="updateValues()"> 4</label>
+                <label><input type="radio" name="speed" value="5" class="mr-2" onchange="updateValues()"> 5</label>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-bold mb-2">Select Growth Rate</h3>
+            <div class="flex gap-2">
+                <label><input type="radio" name="growth" value="1" class="mr-2" onchange="updateValues()"> 1</label>
+                <label><input type="radio" name="growth" value="2" class="mr-2" onchange="updateValues()"> 2</label>
+                <label><input type="radio" name="growth" value="3" class="mr-2" onchange="updateValues()"> 3</label>
+                <label><input type="radio" name="growth" value="4" class="mr-2" onchange="updateValues()"> 4</label>
+                <label><input type="radio" name="growth" value="5" class="mr-2" onchange="updateValues()"> 5</label>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-bold mb-2">Select Mold Lifespan</h3>
+            <div class="flex gap-2">
+                <label><input type="radio" name="lifespan" value="1" class="mr-2" onchange="updateValues()"> 1</label>
+                <label><input type="radio" name="lifespan" value="2" class="mr-2" onchange="updateValues()"> 2</label>
+                <label><input type="radio" name="lifespan" value="3" class="mr-2" onchange="updateValues()"> 3</label>
+                <label><input type="radio" name="lifespan" value="4" class="mr-2" onchange="updateValues()"> 4</label>
+                <label><input type="radio" name="lifespan" value="5" class="mr-2" onchange="updateValues()"> 5</label>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="font-bold mb-2">Select Color Intensity</h3>
+            <div class="flex gap-2">
+                <label><input type="radio" name="color" value="1" class="mr-2" onchange="updateValues()"> 1</label>
+                <label><input type="radio" name="color" value="2" class="mr-2" onchange="updateValues()"> 2</label>
+                <label><input type="radio" name="color" value="3" class="mr-2" onchange="updateValues()"> 3</label>
+                <label><input type="radio" name="color" value="4" class="mr-2" onchange="updateValues()"> 4</label>
+                <label><input type="radio" name="color" value="5" class="mr-2" onchange="updateValues()"> 5</label>
+            </div>
+        </div>
     </div>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+
 
     <script>
-        function updateRating() {
-            rating = parseInt(document.getElementById("rating").value);
-            molds = [];
-            setup();  // Re-run setup to apply new number of molds
+        let density = 3, speed = 3, growth = 3, lifespan = 3, color = 3;
+
+        function updateValues() {
+            const getCheckedValue = (name) => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                return checked ? parseInt(checked.value) : 3; 
+            };
+
+            density = getCheckedValue('density');
+            speed = getCheckedValue('speed');
+            growth = getCheckedValue('growth');
+            lifespan = getCheckedValue('lifespan');
+            color = getCheckedValue('color');
+
+            rerunSimulation();
+        }
+
+        function rerunSimulation() {
+            console.log({ density, speed, growth, lifespan, color });
+            setup();  // Re-run the sketch setup
         }
     </script>
 </body>
 </html>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-          }
-        }
-      }
-    }
-</script>

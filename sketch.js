@@ -1,14 +1,28 @@
 let molds = [];
 let num;
 let d; 
-let rating = 3;  // Change this value from 1 to 5 to control the number of molds
+let rating = 3; // Default rating, dynamically updated from input
 
 function setup() {
   createCanvas(500, 500);
   angleMode(DEGREES);
   d = pixelDensity();
+  updateMoldCount(); // Dynamically calculate number of molds based on rating
+  initializeMolds();
+}
+
+function draw() {
+  background(0, 5);
+  loadPixels();
   
-  // Set the number of molds based on rating
+  for (let i = 0; i < num; i++) {
+    molds[i].update();
+    molds[i].display();
+  }
+}
+
+// Dynamically update the number of molds
+function updateMoldCount() {
   if (rating === 1) {
     num = 200;
   } else if (rating === 2) {
@@ -20,20 +34,22 @@ function setup() {
   } else if (rating === 5) {
     num = 3000;
   }
+}
 
+// Initialize molds based on updated count
+function initializeMolds() {
+  molds = []; // Clear the previous array
   for (let i = 0; i < num; i++) {
     molds[i] = new Mold();
   }
 }
 
-function draw() {
-  background(0, 5);
-  loadPixels();
-  
-  for (let i = 0; i < num; i++) {
-    molds[i].update();
-    molds[i].display();
-  }
+// Re-run setup when rating changes
+function rerunSimulation(newRating) {
+  rating = newRating; // Update rating dynamically
+  updateMoldCount();
+  initializeMolds();
+  redraw();
 }
 
 class Mold {
