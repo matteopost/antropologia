@@ -7,42 +7,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="sketch.js"></script>
-
-    <script>
-        // Set the initial score and random number for num (molds count)
-        window.num = Math.floor(Math.random() * (600 - 200 + 1)) + 200;
-        let score = window.num;
-        console.log("Initial number of molds (score):", score);
-
-        // Set the initial score display on the page
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('score').textContent = score;
-        });
-
-        function updateScore(questionName) {
-            const checked = document.querySelector(`input[name="${questionName}"]:checked`);
-            if (!checked) return;
-
-            const value = parseInt(checked.value);
-
-            if (value === 3) {
-                score += 5;
-            } else if (value === 4) {
-                score += 10;
-            } else if (value === 5) {
-                score += 15;
-            } else if (value === 1 || value === 2) {
-                score -= 10;
-            }
-
-            // Update score display
-            document.getElementById('score').textContent = score;
-
-            if (window.p5Instance) {
-                window.p5Instance.updateMolds(score);  // Update number of molds dynamically
-            }
-        }
-    </script>
     <style>
         body {
             margin: 0;
@@ -57,9 +21,7 @@
 </head>
 <body>
     <a href="/index.html" class="text-blue-500 underline mb-4">Home</a>
-
     <div class="text-lg font-bold mb-4">Current Score: <span id="score"></span></div>
-
     <div class="space-y-4">
         <div>
             <h3 class="font-bold mb-2">Select Mold Density</h3>
@@ -91,79 +53,38 @@
                 <label><input type="radio" name="3" value="5" onchange="updateScore('3')"> 5</label>
             </div>
         </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="4" value="1" onchange="updateScore('4')"> 1</label>
-                <label><input type="radio" name="4" value="2" onchange="updateScore('4')"> 2</label>
-                <label><input type="radio" name="4" value="3" onchange="updateScore('4')"> 3</label>
-                <label><input type="radio" name="4" value="4" onchange="updateScore('4')"> 4</label>
-                <label><input type="radio" name="4" value="5" onchange="updateScore('4')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="5" value="1" onchange="updateScore('5')"> 1</label>
-                <label><input type="radio" name="5" value="2" onchange="updateScore('5')"> 2</label>
-                <label><input type="radio" name="5" value="3" onchange="updateScore('5')"> 3</label>
-                <label><input type="radio" name="5" value="4" onchange="updateScore('5')"> 4</label>
-                <label><input type="radio" name="5" value="5" onchange="updateScore('5')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="6" value="1" onchange="updateScore('6')"> 1</label>
-                <label><input type="radio" name="6" value="2" onchange="updateScore('6')"> 2</label>
-                <label><input type="radio" name="6" value="3" onchange="updateScore('6')"> 3</label>
-                <label><input type="radio" name="6" value="4" onchange="updateScore('6')"> 4</label>
-                <label><input type="radio" name="6" value="5" onchange="updateScore('6')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="7" value="1" onchange="updateScore('7')"> 1</label>
-                <label><input type="radio" name="7" value="2" onchange="updateScore('7')"> 2</label>
-                <label><input type="radio" name="7" value="3" onchange="updateScore('7')"> 3</label>
-                <label><input type="radio" name="7" value="4" onchange="updateScore('7')"> 4</label>
-                <label><input type="radio" name="7" value="5" onchange="updateScore('7')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="8" value="1" onchange="updateScore('8')"> 1</label>
-                <label><input type="radio" name="8" value="2" onchange="updateScore('8')"> 2</label>
-                <label><input type="radio" name="8" value="3" onchange="updateScore('8')"> 3</label>
-                <label><input type="radio" name="8" value="4" onchange="updateScore('8')"> 4</label>
-                <label><input type="radio" name="8" value="5" onchange="updateScore('8')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="9" value="1" onchange="updateScore('9')"> 1</label>
-                <label><input type="radio" name="9" value="2" onchange="updateScore('9')"> 2</label>
-                <label><input type="radio" name="9" value="3" onchange="updateScore('9')"> 3</label>
-                <label><input type="radio" name="9" value="4" onchange="updateScore('9')"> 4</label>
-                <label><input type="radio" name="9" value="5" onchange="updateScore('9')"> 5</label>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold mb-2">Select Mold Density</h3>
-            <div class="flex gap-2">
-                <label><input type="radio" name="10" value="1" onchange="updateScore('10')"> 1</label>
-                <label><input type="radio" name="10" value="2" onchange="updateScore('10')"> 2</label>
-                <label><input type="radio" name="10" value="3" onchange="updateScore('10')"> 3</label>
-                <label><input type="radio" name="10" value="4" onchange="updateScore('10')"> 4</label>
-                <label><input type="radio" name="10" value="5" onchange="updateScore('10')"> 5</label>
-            </div>
-        </div>
-
     </div>
-
     <script src="sketch.js"></script>
+    <script>
+        window.num = Math.floor(Math.random() * (600 - 200 + 1)) + 200;
+        let score = window.num;
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('score').textContent = score;
+        });
+        function updateScore(questionName) {
+            const checked = document.querySelector(`input[name="${questionName}"]:checked`);
+            if (!checked) return;
+            const value = parseInt(checked.value);
+            if (value === 3) {
+                score += 5;
+            } else if (value === 4) {
+                score += 10;
+            } else if (value === 5) {
+                score += 15;
+            } else if (value === 1 || value === 2) {
+                score -= 10;
+            }
+            document.getElementById('score').textContent = score;
+            if (window.p5Instance) {
+                window.p5Instance.updateMolds(score);
+            }
+        }
+        document.querySelectorAll('input[type="radio"]').forEach((input) => {
+            input.addEventListener('change', (e) => {
+                const questionName = e.target.name;
+                updateScore(questionName);
+            });
+        });
+    </script>
 </body>
 </html>
