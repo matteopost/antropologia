@@ -24,7 +24,7 @@ function draw() {
     initializeMolds(currentScore);
   }
 
-  background(0, 5);
+  background(0, 10);
   loadPixels();
   for (let i = 0; i < molds.length; i++) {
     molds[i].update();
@@ -43,11 +43,11 @@ class Mold {
   constructor() {
     this.x = random(width / 2 - 20, width / 2 + 20);
     this.y = random(height / 2 - 20, height / 2 + 20);
-    this.r = random(0.1, 0.7);
+    this.r = random(0.2, 0.3);
     this.heading = random(360);
     this.vx = cos(this.heading);
     this.vy = sin(this.heading);
-    this.rotAngle = random(30, 60);
+    this.rotAngle = random(40, 50);
     this.rSensorPos = createVector(0, 0);
     this.lSensorPos = createVector(0, 0);
     this.fSensorPos = createVector(0, 0);
@@ -89,7 +89,7 @@ class Mold {
 
   display() {
     noStroke();
-    fill(255);
+    fill(random(150,255), 255, 255);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 
