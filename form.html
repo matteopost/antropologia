@@ -22,7 +22,7 @@
         <div class="canvas-container flex items-center justify-center mx-4 relative">
             <div class="absolute flex w-full h-full p-2 z-10 text-white font-mono ">
                 <div>
-                    <p class="bg-black/50 backdrop-blur-sm">1083248</p>
+                    <p class="bg-black/10 backdrop-blur-sm">1083248</p>
                 </div>
             </div>
         </div>
@@ -117,7 +117,8 @@
     </div>
 
     <script>
-        let score = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        // let score = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        let score = 300
         // let score = 10000
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -136,9 +137,9 @@
             } else if (value === 5) {
                 score += Math.floor(Math.random() * (400 - 200 + 1)) + 200;
             } else if (value === 1) {
-                score += Math.floor(Math.random() * (400 - 200 + 1)) + 200;
+                score -= Math.floor(Math.random() * (400 - 200 + 1)) + 200;
             } else if (value === 2) {
-                score += Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+                score -= Math.floor(Math.random() * (200 - 100 + 1)) + 100;
             }
 
             document.getElementById('score').textContent = score;
