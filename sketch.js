@@ -8,7 +8,7 @@ function setup() {
   window.p5Instance = this; 
 
   const canvasParent = document.querySelector('.canvas-container');
-  createCanvas(400, 400).parent(canvasParent);
+  createCanvas(300, 300).parent(canvasParent);
 
   angleMode(DEGREES);
   d = pixelDensity();
@@ -24,7 +24,7 @@ function draw() {
     initializeMolds(currentScore);
   }
 
-  background(0, 10);
+  background(34, 64, 50,  30);
   loadPixels();
   for (let i = 0; i < molds.length; i++) {
     molds[i].update();
@@ -43,7 +43,7 @@ class Mold {
   constructor() {
     this.x = random(width / 2 - 20, width / 2 + 20);
     this.y = random(height / 2 - 20, height / 2 + 20);
-    this.r = random(0.2, 0.3);
+    this.r = random(0.3, 0.4);
     this.heading = random(360);
     this.vx = cos(this.heading);
     this.vy = sin(this.heading);

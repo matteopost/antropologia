@@ -130,15 +130,15 @@
             const value = parseInt(checked.value);
 
             if (value === 3) {
-                score += 100;
+                score += Math.floor(Math.random() * (50 - 20 + 1)) + 20;
             } else if (value === 4) {
-                score += 300;
+                score += Math.floor(Math.random() * (200 - 100 + 1)) + 100;
             } else if (value === 5) {
-                score += 600;
+                score += Math.floor(Math.random() * (400 - 200 + 1)) + 200;
             } else if (value === 1) {
-                score -= 400;
+                score += Math.floor(Math.random() * (400 - 200 + 1)) + 200;
             } else if (value === 2) {
-                score -= 200;
+                score += Math.floor(Math.random() * (200 - 100 + 1)) + 100;
             }
 
             document.getElementById('score').textContent = score;
