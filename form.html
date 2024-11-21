@@ -130,12 +130,14 @@
             const value = parseInt(checked.value);
 
             if (value === 3) {
-                score += 30;
-            } else if (value === 4) {
                 score += 100;
-            } else if (value === 5) {
+            } else if (value === 4) {
                 score += 300;
-            } else if (value === 1 || value === 2) {
+            } else if (value === 5) {
+                score += 600;
+            } else if (value === 1) {
+                score -= 400;
+            } else if (value === 2) {
                 score -= 200;
             }
 
