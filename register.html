@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrati - Datacracy</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    <h1>Registrati</h1>
+    <form id="register-form">
+        <form id="register-form">
+            <form id="register-form">
+                <label for="nome">Name:</label>
+                <input type="text" id="nome" required><br>
+            
+                <label for="cognome">Surname:</label>
+                <input type="text" id="cognome" required><br>
+            
+                <label for="dataNascita">Birthday:</label>
+                <input type="date" id="dataNascita" required><br>
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" required><br>
+            
+                <label for="password">Password:</label>
+                <input type="password" id="password" required><br>
+
+                <button type="submit">Register</button>
+            </form>
+
+            <label>
+                <input type="checkbox" id="terms-checkbox"> Accepts 
+                <a href="#" id="terms-link">Terms and Conditions</a>
+            </label>
+        
+        </form>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <p>Welcome to AXIS. Please read the following Terms and Conditions carefully before using our Site. By using the Site, you agree to the terms outlined below.
+                <br>
+                1. Speculative Project The Site is a speculative project developed as part of the Anthropology of Communications course. Its primary purpose is academic and research-oriented, and all data collected is used exclusively for the purpose of this project.
+                <br>
+                2. Data Collection and Management The data collected through our Site is limited to the information stated on the various pages of the site, such as name, surname, date of birth, and responses to questions. These data are managed exclusively for research and analytical purposes, in line with the project's objectives. We do not collect or process sensitive data beyond what is specifically stated.
+                <br>
+                3. Responsibility We assume no responsibility for any damages arising from the discovery or compromise of passwords or sensitive data entered by users. Although we implement appropriate security measures to protect data, we cannot guarantee complete protection against unauthorized access or data loss.
+                <br>
+                4. Limitation of Liability We are not liable for any direct, indirect, incidental, special, or consequential damages arising from the use of the Site or the registration of data, nor for any technical issues or security breaches related to the Site.
+                <br>
+                5. Modifications to the Terms We reserve the right to modify these Terms and Conditions at any time without notice. Any changes will take effect immediately upon publication on the Site.
+                
+                </p>
+            <button id="accept-terms">Accept terms</button>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

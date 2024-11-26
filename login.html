@@ -4,11 +4,23 @@
     <meta charset="UTF-8" class=" antialiased">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axis - login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <a href="/form.html">Form</a>
+    <h1>Login</h1>
+    <div>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+    <p>First time? <a href="register.html">Register</a></p>
+    </div>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
 <script>
