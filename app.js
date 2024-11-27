@@ -87,7 +87,7 @@ onAuthStateChanged(auth, (user) => {
         }
     } else {
         if (!currentPath.includes("login.html") && !currentPath.includes("register.html")) {
-            window.location.href = "login.html";
+            window.location.href = "register.html";
         }
     }
 });
