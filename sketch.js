@@ -24,7 +24,7 @@ function draw() {
     initializeMolds(currentScore);
   }
 
-  background(34, 64, 50,  30);
+  background(red, green, blue, 30);
   loadPixels();
   for (let i = 0; i < molds.length; i++) {
     molds[i].update();
@@ -89,7 +89,7 @@ class Mold {
 
   display() {
     noStroke();
-    fill(random(150,255), 255, 255);
+    fill(redMold, greenMold, blueMold);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 
@@ -97,4 +97,28 @@ class Mold {
     sensor.x = (this.x + this.sensorDist * cos(angle) + width) % width;
     sensor.y = (this.y + this.sensorDist * sin(angle) + height) % height;
   }
+}
+
+function getTodayDate() {
+  const now = new Date();
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function downloadCanvas() {
+  const today = getTodayDate();
+
+  let tempCanvas = createGraphics(width + 200, height + 300);
+
+  tempCanvas.background(255);
+  tempCanvas.fill(0);
+  tempCanvas.textSize(12);
+  tempCanvas.textAlign(CENTER, TOP);
+  tempCanvas.text(userID, width / 2, 10);
+
+  tempCanvas.image(get(), 0, 50);
+
+  save(tempCanvas, `AXIS - ${today} - ${userID}.png`);
 }

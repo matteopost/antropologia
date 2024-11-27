@@ -6,30 +6,20 @@
     <title>Real-Time Molds</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f8f9fa;
-        }
-    </style>
 </head>
 <body>
-    <div class="container flex items-start gap-1 w-full max-w-screen-lg">
+    <div class="container flex items-start m-auto gap-1 p-12 w-full max-w-screen-lg">
         <div class="canvas-container flex items-center justify-center mx-4 relative">
             <div class="absolute flex w-full h-full p-2 z-10 text-white font-mono ">
                 <div>
-                    <p class="bg-black/10 backdrop-blur-sm">1083248</p>
+                    <p id="userID" class="bg-black/10 backdrop-blur-sm"></p>
                 </div>
             </div>
         </div>
 
         <div class="flex flex-col">
             <a href="/index.html" class="text-blue-500 underline mb-4">Home</a>
-            <div class="text-lg font-bold mb-4">Current Score: <span id="score"></span></div>
+            <div class="text-lg font-bold mb-4 hidden">Current Score: <span id="score"></span></div>
             <div class="space-y-4">
                 <div>
                     <h3 class="font-bold mb-2">Question 1</h3>
@@ -111,15 +101,43 @@
                         <label><input type="radio" name="density8" value="5"> 5</label>
                     </div>
                 </div>
+
+                <div class="">
+                    <button 
+                        id="finish-form"
+                        onclick="downloadCanvas()"
+                        class="py-1 px-3 border border-black rounded-full hover:border-blue-500
+                        hover:text-blue-500 transition-colors"
+                    >
+                        Finished
+                    </button>
+                </div>
+                
+
+
             </div>
         </div>
     </div>
 
+
     <script>
         let score = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        let red = Math.floor(Math.random() * (70 - 0 + 1)) + 0;
+        let green = Math.floor(Math.random() * (70 - 0 + 1)) + 0;
+        let blue = Math.floor(Math.random() * (70 - 0 + 1)) + 0;
+
+        let redMold = Math.floor(Math.random() * (255 - 160 + 1)) + 160;
+        let greenMold = Math.floor(Math.random() * (255 - 160 + 1)) + 160;
+        let blueMold = Math.floor(Math.random() * (255 - 160 + 1)) + 160;
+
+        let userID = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000;
+
+
+
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('score').textContent = score;
+            document.getElementById('userID').textContent = userID;
         });
 
         function updateScore(questionName) {
@@ -129,14 +147,59 @@
 
             if (value === 3) {
                 score += Math.floor(Math.random() * (50 - 20 + 1)) + 20;
+
+                red += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                green += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                blue += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+
+                redMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                greenMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                blueMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+
             } else if (value === 4) {
                 score += Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+
+                red += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+                green += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+                blue += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+
+                redMold += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+                greenMold += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+                blueMold += Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+
             } else if (value === 5) {
                 score += Math.floor(Math.random() * (400 - 200 + 1)) + 200;
+
+                red += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                green += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                blue += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+
+                redMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                greenMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                blueMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+
             } else if (value === 1) {
                 score -= Math.floor(Math.random() * (400 - 200 + 1)) + 200;
+
+                red -= Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                green -= Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                blue -= Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+
+                redMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                greenMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+                blueMold += Math.floor(Math.random() * (6 - 4 + 1)) + 4;
+
             } else if (value === 2) {
                 score -= Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+
+                red -= Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                green -= Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                blue -= Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+
+                redMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                greenMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                blueMold += Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+
             }
 
             document.getElementById('score').textContent = score;
@@ -154,6 +217,7 @@
                 updateScore(questionName);
             });
         });
+
     </script>
     <script src="sketch.js"></script>
 </body>
