@@ -25,6 +25,18 @@ function draw() {
   }
 
   background(red, green, blue, 30);
+
+  // c1 = color(red + 50, green + 50, blue + 50, 30);
+  // c2 = color(red - 50, green - 50, blue - 50, 30);
+  
+  // for(let y=0; y<height; y++){
+  //   n = map(y,0,height,0,1);
+  //   let newc = lerpColor(c1,c2,n);
+  //   stroke(newc);
+  //   line(0,y,width, y);
+  // }
+
+
   loadPixels();
   for (let i = 0; i < molds.length; i++) {
     molds[i].update();
@@ -41,8 +53,10 @@ function initializeMolds(num) {
 
 class Mold {
   constructor() {
-    this.x = random(width / 2 - 20, width / 2 + 20);
-    this.y = random(height / 2 - 20, height / 2 + 20);
+    // this.x = random(width / 2 - 20, width / 2 + 20);
+    // this.y = random(height / 2 - 20, height / 2 + 20);
+    this.x = random(width / 2 - 200, width / 2 + 200);
+    this.y = random(height / 2 - 200, height / 2 + 200);
     this.r = random(0.3, 0.4);
     this.heading = random(360);
     this.vx = cos(this.heading);
