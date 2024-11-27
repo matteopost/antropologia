@@ -78,19 +78,6 @@ function logoutUser() {
 
 document.getElementById("logout-button")?.addEventListener("click", logoutUser);
 
-// Controllo dello stato di autenticazione
-onAuthStateChanged(auth, (user) => {
-    const currentPath = window.location.pathname;
-    if (user) {
-        if (currentPath.includes("login.html") || currentPath.includes("register.html")) {
-            window.location.href = "index.html";
-        }
-    } else {
-        if (!currentPath.includes("login.html") && !currentPath.includes("register.html")) {
-            window.location.href = "register.html";
-        }
-    }
-});
 
 // Gestione del form di registrazione
 document.getElementById("register-form")?.addEventListener("submit", (e) => {
