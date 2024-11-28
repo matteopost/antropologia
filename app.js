@@ -178,20 +178,3 @@ async function saveResponses() {
 document.getElementById("finish-form").addEventListener("click", saveResponses);
 
 
-//per riprendere p5 nel profilo
-let colors;
-let score;
-
-function setup() {
-    createCanvas(400, 400);
-    if (window.p5Params) {
-        colors = window.p5Params.colors; // Recuperiamo i colori
-        score = window.p5Params.score; // Recuperiamo il punteggio
-    }
-    background(colors.red, colors.green, colors.blue); // Impostiamo lo sfondo
-}
-
-function draw() {
-    fill(colors.redMold, colors.greenMold, colors.blueMold);
-    ellipse(width / 2, height / 2, score * 2, score * 2); // Disegniamo l'ellisse
-}
