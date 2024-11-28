@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo - DataCrazia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 2px solid black;
+        }
+        .profile-info {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-info">
+        <h2>Profilo Utente</h2>
+        <p><strong>Nome:</strong> <span id="userName">Caricamento...</span></p>
+        <p><strong>Cognome:</strong> <span id="userSurname">Caricamento...</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">Caricamento...</span></p>
+        <p><strong>Data di Nascita:</strong> <span id="userBirthdate">Caricamento...</span></p>
+    </div>
+
+    <div class="container flex items-start m-auto gap-1 p-12 w-full max-w-screen-lg">
+        <div class="canvas-container flex items-center justify-center mx-4 relative">
+            <div class="absolute flex w-full h-full p-2 z-10 text-white font-mono ">
+                <div>
+                    <p id="userID" class="bg-black/10 backdrop-blur-sm"></p>
+                </div>
+            </div>
+    </div>
+
+    <script src="app.js"></script> <!-- Carica il tuo script app.js che gestisce p5.js -->
+    
+    <script>
+        // Configura Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
+    authDomain: "datacracy-16f27.firebaseapp.com",
+    projectId: "datacracy-16f27",
+    storageBucket: "datacrazia-16f27.appspot.com",
+    messagingSenderId: "643675743445",
+    appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
+    measurementId: "G-VFQQ01LNZ4"
+};
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Autenticazione
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // Se l'utente è autenticato, recuperiamo i dati
+                const userId = user.uid;
+                getUserData(userId);
+            } else {
+                // Se non è autenticato, reindirizza alla pagina di login
+                window.location.href = "login.html";
+            }
+        });
+
+        // Recupera i dati utente da Firestore
+        async function getUserData(userId) {
+            const docRef = db.collection("users").doc(userId);
+            const docSnap = await docRef.get();
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                const p5Params = userData.p5Parameters;
+
+                // Mostra le informazioni dell'utente
+                document.getElementById("userName").innerText = userData.firstName;
+                document.getElementById("userSurname").innerText = userData.lastName;
+                document.getElementById("userEmail").innerText = userData.email;
+                document.getElementById("userBirthdate").innerText = userData.birthDate;
+
+                // Passa i parametri di p5 a app.js per il rendering
+                window.p5Params = p5Params; // Memorizziamo i parametri in una variabile globale
+                createCanvas(); // Chiamiamo la funzione di app.js per creare il canvas
+            }
+        }
+    </script>
+</body>
+</html>

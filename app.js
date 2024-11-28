@@ -135,7 +135,6 @@ document.getElementById("terms-checkbox")?.addEventListener("change", function (
 });
 
 
-// Funzione per salvare le risposte
 async function saveResponses() {
     const user = auth.currentUser;
     if (!user) {
@@ -150,14 +149,25 @@ async function saveResponses() {
         responses[`density${i}`] = value ? parseInt(value.value) : null;
     }
 
+    // Aggiungi i parametri di p5.js
+    const p5Params = {
+        score: score,
+        red: red,
+        green: green,
+        blue: blue,
+        redMold: redMold,
+        greenMold: greenMold,
+        blueMold: blueMold,
+        timestamp: serverTimestamp()
+    };
+
     try {
-        // Salva nel Firestore
+        // Salva nel Firestore, unendo risposte e parametri di p5.js
         await setDoc(doc(db, "responses", user.uid), {
             answers: responses,
-            score: score,  // Usa la variabile "score" dal tuo codice
-            timestamp: serverTimestamp()
+            p5Params: p5Params  // Aggiungi i parametri di p5.js
         });
-        alert("Risposte salvate con successo!");
+        alert("Risposte e parametri salvati con successo!");
     } catch (error) {
         console.error("Errore nel salvataggio delle risposte:", error);
         alert("Errore: " + error.message);
@@ -166,3 +176,22 @@ async function saveResponses() {
 
 // Aggiungi il listener al bottone
 document.getElementById("finish-form").addEventListener("click", saveResponses);
+
+
+//per riprendere p5 nel profilo
+let colors;
+let score;
+
+function setup() {
+    createCanvas(400, 400);
+    if (window.p5Params) {
+        colors = window.p5Params.colors; // Recuperiamo i colori
+        score = window.p5Params.score; // Recuperiamo il punteggio
+    }
+    background(colors.red, colors.green, colors.blue); // Impostiamo lo sfondo
+}
+
+function draw() {
+    fill(colors.redMold, colors.greenMold, colors.blueMold);
+    ellipse(width / 2, height / 2, score * 2, score * 2); // Disegniamo l'ellisse
+}
