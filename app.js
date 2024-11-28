@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // Configura Firebase
 const firebaseConfig = {
@@ -132,3 +133,36 @@ document.getElementById("accept-terms")?.addEventListener("click", function () {
 document.getElementById("terms-checkbox")?.addEventListener("change", function () {
     document.getElementById("register-button").disabled = !this.checked;
 });
+
+
+// Funzione per salvare le risposte
+async function saveResponses() {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("Devi essere autenticato per inviare le risposte.");
+        return;
+    }
+
+    // Ottieni le risposte dal form
+    const responses = {};
+    for (let i = 1; i <= 8; i++) {
+        const value = document.querySelector(`input[name="density${i}"]:checked`);
+        responses[`density${i}`] = value ? parseInt(value.value) : null;
+    }
+
+    try {
+        // Salva nel Firestore
+        await setDoc(doc(db, "responses", user.uid), {
+            answers: responses,
+            score: score,  // Usa la variabile "score" dal tuo codice
+            timestamp: serverTimestamp()
+        });
+        alert("Risposte salvate con successo!");
+    } catch (error) {
+        console.error("Errore nel salvataggio delle risposte:", error);
+        alert("Errore: " + error.message);
+    }
+}
+
+// Aggiungi il listener al bottone
+document.getElementById("finish-form").addEventListener("click", saveResponses);

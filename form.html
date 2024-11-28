@@ -104,13 +104,13 @@
 
                 <div class="">
                     <button 
-                        id="finish-form"
-                        onclick="downloadCanvas()"
-                        class="py-1 px-3 border border-black rounded-full hover:border-blue-500
+                    id="finish-form"
+                    onclick="downloadCanvas(); saveFormResponses();"
+                    class="py-1 px-3 border border-black rounded-full hover:border-blue-500
                         hover:text-blue-500 transition-colors"
-                    >
-                        Finished
-                    </button>
+                        >
+                     Finished
+                </button>
                 </div>
                 
 
@@ -220,5 +220,6 @@
 
     </script>
     <script src="sketch.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
