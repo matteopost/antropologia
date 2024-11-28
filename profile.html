@@ -4,155 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilo Utente</title>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
     <div id="profile-info">
         <!-- Info utente mostrate qui -->
     </div>
-    <div class="canvas-container"></div>
+    <div class="canvas-container flex items-center justify-center mx-4 relative">
+    </div>
 
     <!-- Carica Firebase e p5.js -->
-    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
-            authDomain: "datacracy-16f27.firebaseapp.com",
-            projectId: "datacracy-16f27",
-            storageBucket: "datacrazia-16f27.appspot.com",
-            messagingSenderId: "643675743445",
-            appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
-            measurementId: "G-VFQQ01LNZ4"
-        };
 
-        // Inizializza Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        let score, red, green, blue, redMold, greenMold, blueMold;
-
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                const userId = user.uid;
-                displayProfileInfo(user);
-                loadP5Params(userId);
-            } else {
-                window.location.href = "login.html";
-            }
-        });
-
-        function displayProfileInfo(user) {
-            document.getElementById('profile-info').innerHTML = `
-                <p><strong>Email:</strong> ${user.email}</p>
-            `;
-        }
-
-        function loadP5Params(userId) {
-            console.log("Caricando i parametri per l'utente:", userId);
-            db.collection('responses').doc(userId).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        console.log("Dati trovati:", doc.data());
-                        const params = doc.data().p5Params;
-
-                        // Controlla se i parametri sono validi
-                        score = params.score || 0;
-                        red = params.red || 30;
-                        green = params.green || 30;
-                        blue = params.blue || 30;
-                        redMold = params.redMold || 160;
-                        greenMold = params.greenMold || 160;
-                        blueMold = params.blueMold || 160;
-
-                        // Log per verificare i valori
-                        console.log(`score: ${score}, red: ${red}, green: ${green}, blue: ${blue}`);
-                        console.log(`redMold: ${redMold}, greenMold: ${greenMold}, blueMold: ${blueMold}`);
-
-                        initializeP5(); // Inizializza p5 con i parametri
-                    } else {
-                        console.error("Nessun dato trovato per questo utente!");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Errore nel recupero dei dati:", error);
-                });
-        }
-
-        // Funzione che inizializza p5.js con i parametri
-        function initializeP5() {
-            new p5(function(p) {
-                let molds = [];
-                let d;
-                let currentScore = score;
-
-                p.setup = function() {
-                    const canvasParent = document.querySelector('.canvas-container');
-                    p.createCanvas(400, 400).parent(canvasParent);
-                    p.angleMode(p.DEGREES);
-                    d = p.pixelDensity();
-                    initializeMolds(currentScore);
-                };
-
-                p.draw = function() {
-                    p.background(red, green, blue, 30);
-                    p.loadPixels();
-                    for (let i = 0; i < molds.length; i++) {
-                        molds[i].update();
-                        molds[i].display();
-                    }
-                };
-
-                function initializeMolds(num) {
-                    molds = [];
-                    for (let i = 0; i < num; i++) {
-                        molds.push(new Mold());
-                    }
-                    console.log(`Molds inizializzati: ${molds.length}`);
-                }
-
-                class Mold {
-                    constructor() {
-                        this.x = p.random(p.width / 2 - 200, p.width / 2 + 200);
-                        this.y = p.random(p.height / 2 - 200, p.height / 2 + 200);
-                        this.r = p.random(0.3, 0.4);
-                        this.heading = p.random(360);
-                        this.vx = p.cos(this.heading);
-                        this.vy = p.sin(this.heading);
-                        this.rotAngle = p.random(40, 50);
-                        this.rSensorPos = p.createVector(0, 0);
-                        this.lSensorPos = p.createVector(0, 0);
-                        this.fSensorPos = p.createVector(0, 0);
-                        this.sensorAngle = p.random(35, 55);
-                        this.sensorDist = p.random(8, 12);
-                    }
-
-                    update() {
-                        this.vx = p.cos(this.heading);
-                        this.vy = p.sin(this.heading);
-                        this.x = (this.x + this.vx + p.width) % p.width;
-                        this.y = (this.y + this.vy + p.height) % p.height;
-                        this.getSensorPos(this.rSensorPos, this.heading + this.sensorAngle);
-                        this.getSensorPos(this.lSensorPos, this.heading - this.sensorAngle);
-                        this.getSensorPos(this.fSensorPos, this.heading);
-                    }
-
-                    display() {
-                        p.noStroke();
-                        p.fill(redMold, greenMold, blueMold);
-                        p.ellipse(this.x, this.y, this.r * 2, this.r * 2);
-                    }
-
-                    getSensorPos(sensor, angle) {
-                        sensor.x = (this.x + this.sensorDist * p.cos(angle) + p.width) % p.width;
-                        sensor.y = (this.y + this.sensorDist * p.sin(angle) + p.height) % p.height;
-                    }
-                }
-            });
-        }
-    </script>
+    
 </body>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
+        authDomain: "datacracy-16f27.firebaseapp.com",
+        projectId: "datacracy-16f27",
+        storageBucket: "datacrazia-16f27.appspot.com",
+        messagingSenderId: "643675743445",
+        appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
+        measurementId: "G-VFQQ01LNZ4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let score, red, green, blue, redMold, greenMold, blueMold;
+
+    // let score = 5000
+    // let red = 0
+    // let green = 0
+    // let blue = 0
+    // let redMold = 255
+    // let greenMold = 255
+    // let blueMold = 255
+
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            const userId = user.uid;
+            displayProfileInfo(user);
+            loadP5Params(userId);
+        } else {
+            window.location.href = "login.html";
+        }
+    });
+
+    function displayProfileInfo(user) {
+        document.getElementById('profile-info').innerHTML = `
+            <p><strong>Email:</strong> ${user.email}</p>
+        `;
+    }
+
+    function loadP5Params(userId) {
+        console.log("Caricando i parametri per l'utente:", userId);
+        db.collection('responses').doc(userId).get()
+        .then((doc) => {
+            if (doc.exists) {
+                console.log("Dati trovati:", doc.data());
+                const params = doc.data().p5Params;
+
+                // Controlla se i parametri sono validi
+                score = params.score || 0;
+                red = params.red || 30;
+                green = params.green || 30;
+                blue = params.blue || 30;
+                redMold = params.redMold || 160;
+                greenMold = params.greenMold || 160;
+                blueMold = params.blueMold || 160;
+
+                // Log per verificare i valori
+                console.log(`score: ${score}, red: ${red}, green: ${green}, blue: ${blue}`);
+                console.log(`redMold: ${redMold}, greenMold: ${greenMold}, blueMold: ${blueMold}`);
+
+                initializeP5(); // Inizializza p5 con i parametri
+            } else {
+                console.error("Nessun dato trovato per questo utente!");
+            }
+        })
+        .catch((error) => {
+            console.error("Errore nel recupero dei dati:", error);
+        });
+    };
+
+    
+</script>
+<script src="sketch2.js"></script>
 </html>
