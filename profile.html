@@ -37,9 +37,9 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    let score, red, green, blue, redMold, greenMold, blueMold;
+    let red, green, blue, redMold, greenMold, blueMold;
 
-    // let score = 5000
+    let score = 5000
     // let red = 0
     // let green = 0
     // let blue = 0
@@ -72,7 +72,7 @@
                 const params = doc.data().p5Params;
 
                 // Controlla se i parametri sono validi
-                score = params.score || 0;
+                // score = params.score || 0;
                 red = params.red || 30;
                 green = params.green || 30;
                 blue = params.blue || 30;

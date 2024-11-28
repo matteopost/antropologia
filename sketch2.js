@@ -1,5 +1,6 @@
 
 let molds = [];
+let num = score
 let d;
 let p5Instance;
 let currentScore = 0;
