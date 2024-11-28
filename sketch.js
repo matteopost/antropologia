@@ -8,7 +8,7 @@ function setup() {
   window.p5Instance = this; 
 
   const canvasParent = document.querySelector('.canvas-container');
-  createCanvas(300, 300).parent(canvasParent);
+  createCanvas(400, 400).parent(canvasParent);
 
   angleMode(DEGREES);
   d = pixelDensity();
@@ -124,13 +124,13 @@ function getTodayDate() {
 function downloadCanvas() {
   const today = getTodayDate();
 
-  let tempCanvas = createGraphics(width + 200, height + 300);
+  let tempCanvas = createGraphics(width, height);
 
-  tempCanvas.background(255);
-  tempCanvas.fill(0);
-  tempCanvas.textSize(12);
-  tempCanvas.textAlign(CENTER, TOP);
-  tempCanvas.text(userID, width / 2, 10);
+  // tempCanvas.background(255);
+  // tempCanvas.fill(0);
+  // tempCanvas.textSize(12);
+  // tempCanvas.textAlign(CENTER, TOP);
+  // tempCanvas.text(userID, width / 2, 10);
 
   tempCanvas.image(get(), 0, 50);
 
