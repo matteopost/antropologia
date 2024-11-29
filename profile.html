@@ -10,13 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
+
+    <div class="">
+        <a href="/index.html">Home</a>
+    </div>
     <div id="profile-info">
         <!-- Info utente mostrate qui -->
     </div>
     <div class="canvas-container flex items-center justify-center mx-4 relative">
     </div>
-
-    <!-- Carica Firebase e p5.js -->
 
 
     
@@ -37,15 +39,8 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    let red, green, blue, redMold, greenMold, blueMold;
-
-    let score = 5000
-    // let red = 0
-    // let green = 0
-    // let blue = 0
-    // let redMold = 255
-    // let greenMold = 255
-    // let blueMold = 255
+    let score = 0, red, green, blue, redMold, greenMold, blueMold;
+    let num = score;
 
     auth.onAuthStateChanged((user) => {
     if (user) {
@@ -73,7 +68,7 @@
                 const params = doc.data().p5Params;
 
                 // Controlla se i parametri sono validi
-                // score = params.score || 0;
+                score = params.score || 0;
                 red = params.red || 30;
                 green = params.green || 30;
                 blue = params.blue || 30;
@@ -84,8 +79,7 @@
                 // Log per verificare i valori
                 console.log(`score: ${score}, red: ${red}, green: ${green}, blue: ${blue}`);
                 console.log(`redMold: ${redMold}, greenMold: ${greenMold}, blueMold: ${blueMold}`);
-
-                initializeP5(); 
+                initializeP5();
             } else {
                 console.error("Nessun dato trovato per questo utente!");
             }

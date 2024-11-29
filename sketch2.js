@@ -1,7 +1,6 @@
 let molds = [];
 let d;
 let p5Instance;
-let currentScore = 0;
 
 function setup() {
   p5Instance = this;
@@ -13,43 +12,27 @@ function setup() {
   angleMode(DEGREES);
   d = pixelDensity();
   
-  currentScore = parseInt(document.getElementById("score").innerHTML, 10);
-  initializeMolds(currentScore);
-}
-
-function draw() {
-  const newScore = parseInt(document.getElementById("score").innerHTML, 10);
-  if (newScore !== currentScore) {
-    currentScore = newScore;
-    initializeMolds(currentScore);
-  }
-
-  background(red, green, blue, 30);
-
-  // c1 = color(red + 50, green + 50, blue + 50, 30);
-  // c2 = color(red - 50, green - 50, blue - 50, 30);
-  
-  // for(let y=0; y<height; y++){
-  //   n = map(y,0,height,0,1);
-  //   let newc = lerpColor(c1,c2,n);
-  //   stroke(newc);
-  //   line(0,y,width, y);
-  // }
-
-
-  loadPixels();
-  for (let i = 0; i < molds.length; i++) {
-    molds[i].update();
-    molds[i].display();
-  }
-}
-
-function initializeMolds(num) {
-  molds = [];
   for (let i = 0; i < num; i++) {
     molds.push(new Mold());
   }
 }
+
+function draw() {
+  background(red, green, blue, 30);
+  loadPixels();
+
+
+  while (molds.length < score) {
+      molds.push(new Mold());
+  }
+
+  for (let i = 0; i < molds.length; i++) {
+      molds[i].update();
+      molds[i].display();
+  }
+}
+
+
 
 class Mold {
   constructor() {
