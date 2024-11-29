@@ -1,6 +1,4 @@
-
 let molds = [];
-let num = score
 let d;
 let p5Instance;
 let currentScore = 0;
@@ -15,12 +13,29 @@ function setup() {
   angleMode(DEGREES);
   d = pixelDensity();
   
+  currentScore = parseInt(document.getElementById("score").innerHTML, 10);
   initializeMolds(currentScore);
 }
 
 function draw() {
+  const newScore = parseInt(document.getElementById("score").innerHTML, 10);
+  if (newScore !== currentScore) {
+    currentScore = newScore;
+    initializeMolds(currentScore);
+  }
 
   background(red, green, blue, 30);
+
+  // c1 = color(red + 50, green + 50, blue + 50, 30);
+  // c2 = color(red - 50, green - 50, blue - 50, 30);
+  
+  // for(let y=0; y<height; y++){
+  //   n = map(y,0,height,0,1);
+  //   let newc = lerpColor(c1,c2,n);
+  //   stroke(newc);
+  //   line(0,y,width, y);
+  // }
+
 
   loadPixels();
   for (let i = 0; i < molds.length; i++) {
@@ -35,7 +50,6 @@ function initializeMolds(num) {
     molds.push(new Mold());
   }
 }
-
 
 class Mold {
   constructor() {
@@ -106,6 +120,19 @@ function getTodayDate() {
   const year = now.getFullYear();
   return `${day}/${month}/${year}`;
 }
+
+function saveFormResponses() {
+  const responses = {};
+  // Esempio di raccolta delle risposte per ogni domanda
+  for (let i = 1; i <= 8; i++) {
+    const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
+    if (selectedOption) {
+      responses[`density${i}`] = selectedOption.value;
+    }
+  }
+  console.log(responses);  // A questo punto puoi inviare questi dati al server o salvarli dove necessario
+}
+
 
 function downloadCanvas() {
   const today = getTodayDate();

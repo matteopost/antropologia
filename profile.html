@@ -48,14 +48,15 @@
     // let blueMold = 255
 
     auth.onAuthStateChanged((user) => {
-        if (user) {
-            const userId = user.uid;
-            displayProfileInfo(user);
-            loadP5Params(userId);
-        } else {
-            window.location.href = "login.html";
-        }
+    if (user) {
+        const userId = user.uid;
+        displayProfileInfo(user);
+        loadP5Params(userId);  // Carica i parametri di p5.js
+    } else {
+        window.location.href = "login.html";
+    }
     });
+
 
     function displayProfileInfo(user) {
         document.getElementById('profile-info').innerHTML = `

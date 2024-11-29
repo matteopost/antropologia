@@ -121,6 +121,19 @@ function getTodayDate() {
   return `${day}/${month}/${year}`;
 }
 
+function saveFormResponses() {
+  const responses = {};
+  // Esempio di raccolta delle risposte per ogni domanda
+  for (let i = 1; i <= 8; i++) {
+    const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
+    if (selectedOption) {
+      responses[`density${i}`] = selectedOption.value;
+    }
+  }
+  console.log(responses);  // A questo punto puoi inviare questi dati al server o salvarli dove necessario
+}
+
+
 function downloadCanvas() {
   const today = getTodayDate();
 
