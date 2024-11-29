@@ -10,16 +10,109 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Login</h1>
-    <div>
-    <form id="login-form">
-        <input type="email" id="email" placeholder="Email" required><br>
-        <input type="password" id="password" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>First time? <a href="register.html">Register</a></p>
+<body class="bg-gradient-to-br w-screen h-screen from-violet-100 from-10% via-gray-100 via-20%
+to-blue-100 to to-90%">
+  <div class="flex flex-col mx-auto my-12 w-full max-w-screen-sm ">
+
+    <!-- Logo -->
+     <div class="flex m-auto">
+      <img 
+      src="./assets/svg/axis-logo.svg" 
+      alt="logo axis"
+      class="h-36 mb-24 pointer-events-none"
+      >
+     </div>
+
+
+     <!-- Login -->
+     <div class="p-12 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+      <h1 class="text-xl mb-8">
+        Sign in to your account
+      </h1>
+
+      <form id="login-form">
+        <div class="mb-3">
+          <h1 class="mb-2">
+            E-mail
+          </h1>
+        
+          <input 
+            type="email" 
+            id="email" 
+            required
+            placeholder="adress@axis.com"
+            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+            peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+          />
+          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          transition-colors">
+            Please enter a valid email address.
+          </p>
+        </div>
+        
+        <h1 class="mb-2">
+          Password
+        </h1>
+      
+        <input 
+          type="password" 
+          id="password" 
+          required
+          class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+          focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+          peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+        />
+        <p class="mt-1 mb-2 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+        transition-colors">
+          Password is required.
+        </p>
+        
+        
+        <div class="flex w-full justify-between items-center mb-12">
+          <div class="text-gray-400 flex items-center space-x-2">
+            <input 
+              type="checkbox" 
+              class="peer border border-gray-200 rounded focus:ring-0 checked:bg-violet-500 
+              transition-colors "
+            >
+            <label class="peer-checked:text-violet-500 transition-colors">
+              Remember me
+            </label>
+          </div>
+          
+          
+          <div class="">
+            <a href="register.html"
+            class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold"
+            >
+              Register
+            </a>
+          </div>
+        </div>
+
+        <div class="">
+          <button 
+            type="submit"
+            class="w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
+            >
+            Login
+          </button>
+        </div>
+
+
+
+
+        
+        
+
+
+          
+      </form>
+      
     </div>
+  </div>
     <script type="module" src="app.js"></script>
 </body>
 </html>
