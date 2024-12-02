@@ -54,7 +54,6 @@
       x-transition:leave="transition ease-in duration-200"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-50 "
-      style="display: none;"
     >
       <div class="w-full py-2 px-6">
         <a href="/profile.html" class="hover:text-blue-500 transition-colors">
@@ -63,7 +62,7 @@
       </div>
       <div class="w-full py-2 px-6">
         <a
-          href="/profile.html"
+          id="logout-button"
           class="text-red-400 hover:text-red-600 transition-colors"
         >
           Logout
@@ -77,11 +76,47 @@
 
   <div class="flex flex-col w-full mx-auto max-w-screen-xl my-8 lg:my-12">
 
-    <a href="/form.html">FORM</a>
+    
+    <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+      <h1 class="text-4xl">
+        Join the future and become a citizen of Axis
+      </h1>
+      <div class="">
+
+      </div>
+      <a href="/form.html">FORM</a>
+      
+    </div>
+
+
+
+
+
+
+    <!-- FOOTER -->
+    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-300">
+      <p>
+        This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
+        in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
+      </p>
+      <p>
+        We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
+        (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
+      </p>
+      <p>
+        This website is solely for university purposes and not for commercial use. It is a speculative project.
+      </p>
+      <p>
+        By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
+      </p>
+    </footer>
+      
   </div>
 
 </body>
 </html>
+
+
 <script type="module" src="app.js"></script>
 <script>
     tailwind.config = {
