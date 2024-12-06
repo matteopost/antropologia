@@ -17,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
+
 // Funzione di registrazione utente
 export async function registerUser(email, password, nome, cognome, dataNascita) {
     try {
