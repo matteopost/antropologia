@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// Configura Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
     authDomain: "datacracy-16f27.firebaseapp.com",
@@ -13,14 +12,94 @@ const firebaseConfig = {
     appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
     measurementId: "G-VFQQ01LNZ4"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
+document.addEventListener("DOMContentLoaded", () => {
+    const userNameElement = document.querySelector(".hover\\:text-blue-500");
+
+    // Verifica se l'elemento è presente
+    if (userNameElement) {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const userDocRef = doc(db, "users", user.uid);
+                    const userDoc = await getDoc(userDocRef);
+                    if (userDoc.exists()) {
+                        const userName = userDoc.data().nome;
+                        userNameElement.textContent = userName || "Utente";
+                    } else {
+                        console.warn("Utente non trovato nel database");
+                        userNameElement.textContent = "Utente Sconosciuto";
+                    }
+                } catch (error) {
+                    console.error("Errore durante il fetch:", error);
+                    userNameElement.textContent = "Errore";
+                }
+            } else {
+                console.warn("Nessun utente autenticato");
+                userNameElement.textContent = "Guest";
+            }
+        });
+    } else {
+        console.warn("Elemento per il nome utente non trovato");
+    }
+
+    // Event listeners per i form
+    document.getElementById("logout-button")?.addEventListener("click", logoutUser);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Gestione del form di login
+    const loginForm = document.getElementById("login-form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Chiama la funzione di login
+            loginUser(email, password);
+        });
+    }
+});
+
+// Funzione di login utente
+async function loginUser(email, password) {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Aggiorna il documento con l'ultimo accesso
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, { lastLogin: serverTimestamp() }, { merge: true });
+
+        // Redirige l'utente alla home page dopo il login
+        window.location.href = "index.html";
+    } catch (error) {
+        console.error("Errore durante il login:", error);
+        alert("Errore: " + error.message);
+    }
+}
+
+document.getElementById("register-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const nome = document.getElementById("nome").value;
+    const cognome = document.getElementById("cognome").value;
+    const dataNascita = document.getElementById("dataNascita").value;
+
+    // Chiama la funzione di registrazione con i dati
+    registerUser(email, password, nome, cognome, dataNascita);
+});
 
 // Funzione di registrazione utente
 export async function registerUser(email, password, nome, cognome, dataNascita) {
     try {
+        // Controlla se l'utente è maggiorenne
         const birthDate = new Date(dataNascita);
         const currentDate = new Date();
         const age = currentDate.getFullYear() - birthDate.getFullYear();
@@ -31,17 +110,21 @@ export async function registerUser(email, password, nome, cognome, dataNascita) 
             return;
         }
 
+        // Crea l'utente con email e password
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
+        // Ottieni il riferimento del documento dell'utente nel Firestore
         const userRef = doc(db, "users", user.uid);
+
+        // Salva i dettagli dell'utente (nome, cognome, data di nascita, etc.)
         await setDoc(userRef, {
             email: user.email,
             nome: nome,
             cognome: cognome,
             dataNascita: dataNascita,
-            createdAt: serverTimestamp(),
-            lastLogin: serverTimestamp()
+            createdAt: serverTimestamp(),  // Timestamp di creazione
+            lastLogin: serverTimestamp()   // Timestamp dell'ultimo login (inizialmente quando viene creato)
         }, { merge: true });
 
         alert("Registrazione avvenuta con successo! Ora effettua il login.");
@@ -52,21 +135,36 @@ export async function registerUser(email, password, nome, cognome, dataNascita) 
     }
 }
 
-// Funzione di login utente
-export async function loginUser(email, password) {
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(userRef, { lastLogin: serverTimestamp() }, { merge: true });
-
-        window.location.href = "index.html";
-    } catch (error) {
-        console.error("Errore durante il login:", error);
-        alert("Errore: " + error.message);
+// Funzione per aggiornare l'avatar con le iniziali
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        // Ottieni il documento dell'utente da Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        
+        if (userDoc.exists()) {
+          const userName = userDoc.data().nome; // Prendi il nome
+          const userSurname = userDoc.data().cognome; // Prendi il cognome
+          
+          // Calcola le iniziali
+          const initials = (userName[0] + userSurname[0]).toUpperCase(); // Prima lettera del nome e cognome
+          
+          // Aggiorna l'avatar nel DOM con le iniziali
+          document.getElementById("user-avatar").textContent = initials;
+          
+          // (Opzionale) Aggiorna anche il nome visualizzato accanto all'avatar
+          document.querySelector(".hover\\:text-blue-500").textContent = userName;
+        }
+      } catch (error) {
+        console.error("Errore nel recuperare i dati utente:", error);
+      }
+    } else {
+      // Se l'utente non è autenticato, puoi impostare un valore di default per l'avatar
+      document.getElementById("user-avatar").textContent = "??"; // Avatar di default
     }
-}
+  });
+  
 
 // Funzione di logout utente
 function logoutUser() {
@@ -78,63 +176,15 @@ function logoutUser() {
     });
 }
 
-document.getElementById("logout-button")?.addEventListener("click", logoutUser);
-
-// Controllo dello stato di autenticazione
-onAuthStateChanged(auth, (user) => {
-    const currentPath = window.location.pathname;
-    if (user) {
-        if (currentPath.includes("login.html") || currentPath.includes("register.html")) {
-            window.location.href = "index.html";
-        }
+// Aggiungi il listener di logout quando il DOM è pronto
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutButton = document.getElementById("logout-button");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", logoutUser);
     } else {
-        if (!currentPath.includes("login.html") && !currentPath.includes("register.html")) {
-            window.location.href = "login.html";
-        }
+        console.warn("Logout button not found!");
     }
 });
-
-// Gestione del form di registrazione
-document.getElementById("register-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const nome = document.getElementById("nome").value;
-    const cognome = document.getElementById("cognome").value;
-    const dataNascita = document.getElementById("dataNascita").value;
-
-    registerUser(email, password, nome, cognome, dataNascita);
-});
-
-// Gestione del form di login
-document.getElementById("login-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    loginUser(email, password);
-});
-
-// Modale dei Termini e Condizioni
-document.getElementById("terms-link")?.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.getElementById("terms-modal").style.display = "flex";
-});
-
-document.getElementById("close-modal")?.addEventListener("click", function () {
-    document.getElementById("terms-modal").style.display = "none";
-});
-
-document.getElementById("accept-terms")?.addEventListener("click", function () {
-    document.getElementById("terms-modal").style.display = "none";
-    document.getElementById("terms-checkbox").checked = true;
-    document.getElementById("register-button").disabled = false;
-});
-
-document.getElementById("terms-checkbox")?.addEventListener("change", function () {
-    document.getElementById("register-button").disabled = !this.checked;
-});
-
 
 async function saveResponses() {
     const user = auth.currentUser;
@@ -143,17 +193,15 @@ async function saveResponses() {
         return;
     }
 
-    // Ottieni le risposte dal form
     const responses = {};
     for (let i = 1; i <= 8; i++) {
         const value = document.querySelector(`input[name="density${i}"]:checked`);
         responses[`density${i}`] = value ? parseInt(value.value) : null;
     }
 
-    // Aggiungi i parametri di p5.js
     const p5Params = {
-        score: score,
-        red: red,
+        score: score,  // Assicurati che 'score' sia definito altrove nel codice
+        red: red,      // Stessa cosa per le altre variabili
         green: green,
         blue: blue,
         redMold: redMold,
@@ -163,10 +211,9 @@ async function saveResponses() {
     };
 
     try {
-        // Salva nel Firestore, unendo risposte e parametri di p5.js
         await setDoc(doc(db, "responses", user.uid), {
             answers: responses,
-            p5Params: p5Params  // Aggiungi i parametri di p5.js
+            p5Params: p5Params
         });
         alert("Risposte e parametri salvati con successo!");
     } catch (error) {
@@ -175,7 +222,4 @@ async function saveResponses() {
     }
 }
 
-// Aggiungi il listener al bottone
-document.getElementById("finish-form").addEventListener("click", saveResponses);
-
-
+document.getElementById("finish-form")?.addEventListener("click", saveResponses);
