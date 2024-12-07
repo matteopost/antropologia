@@ -33,58 +33,55 @@
             <p class=" hover:text-blue-500 transition-colors cursor-pointer"
             @click="dropdown = !dropdown"
             >
-              Edoardo
+              Loading...
             </p>
-          </div>
-    
-          <div
-            class="bg-gray-300 rounded-full size-10 font-light text-slate-100 flex items-start cursor-pointer"
-            @click="dropdown = !dropdown"
-          >
-            <p class="m-auto">EB</p>
-          </div>
         </div>
+
+        <div
+        class="bg-gray-300 rounded-full size-10 font-light text-slate-100 flex items-start cursor-pointer"
+        id="user-avatar"
+        @click="dropdown = !dropdown"
+      >
+        <p class="m-auto">??</p>
+      </div>
+      </div>
       </div>
     
       <div
-        class="flex absolute top-22 right-4 ml-auto flex-col mt-2 w-40 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
-        x-show="dropdown"
-        x-cloak
-        @click.away="dropdown = false"
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-50 "
-        x-transition:enter-end="opacity-100 "
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-50 "
-        style="display: none;"
-      >
-        <div class="w-full py-2 px-6">
+      class="flex absolute top-22 right-4 ml-auto flex-col mt-2 w-40 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+      x-show="dropdown"
+      x-cloak
+      @click.away="dropdown = false"
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-50 "
+      x-transition:enter-end="opacity-100 "
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-50 "
+      style="display: none;"
+  >
+      <div class="w-full py-2 px-6">
           <a href="/profile.html" class="hover:text-blue-500 transition-colors">
-            Profile
+              Profile
           </a>
-        </div>
-        <div class="w-full py-2 px-6">
-          <a
-            href="/profile.html"
-            class="text-red-400 hover:text-red-600 transition-colors"
-          >
-            Logout
-          </a>
-        </div>
       </div>
-    </div>
+      <div class="w-full py-2 px-6">
+          <a
+              href="javascript:void(0);"
+              onclick="logoutUser()"
+              class="text-red-400 hover:text-red-600 transition-colors"
+          >
+              Logout
+          </a>
+      </div>
+  </div>  
     
-    
-
-    <div class="">
-        <a href="/index.html">Home</a>
-    </div>
     <div id="profile-info">
         <!-- Info utente mostrate qui -->
     </div>
     <div class="canvas-container flex items-center justify-center mx-4 relative">
     </div>
+
 
 
     
@@ -108,22 +105,95 @@
     let score = 0, red, green, blue, redMold, greenMold, blueMold;
     let num = score;
 
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
     if (user) {
-        const userId = user.uid;
+      const userId = user.uid;
         displayProfileInfo(user);
         loadP5Params(userId);  // Carica i parametri di p5.js
+        try {
+            const userDocRef = db.collection("users").doc(user.uid);
+            const userDoc = await userDocRef.get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+
+                // Dati da visualizzare
+                const userName = userData.nome || "Nome non disponibile";
+                const userSurname = userData.cognome || "Cognome non disponibile";
+                const userBirthDate = userData.dataNascita || "Data di nascita non disponibile";
+
+                // Mostra i dati nel profilo
+                displayProfileInfo({
+                    email: user.email,
+                    nome: userName,
+                    cognome: userSurname,
+                    dataNascita: userBirthDate,
+                });
+            } else {
+                console.warn("Utente non trovato nel database");
+                displayProfileInfo({
+                    email: user.email,
+                    nome: "Utente Sconosciuto",
+                    cognome: "-",
+                    dataNascita: "-",
+                });
+            }
+        } catch (error) {
+            console.error("Errore durante il fetch:", error);
+            displayProfileInfo({
+                email: user.email,
+                nome: "Errore",
+                cognome: "-",
+                dataNascita: "-",
+            });
+        }
     } else {
-        window.location.href = "login.html";
+        window.location.href = "login.html"; // Reindirizza se non autenticato
     }
-    });
+});
 
+    document.addEventListener("DOMContentLoaded", () => {
+    const userNameElement = document.querySelector(".hover\\:text-blue-500");
 
-    function displayProfileInfo(user) {
-        document.getElementById('profile-info').innerHTML = `
-            <p><strong>Email:</strong> ${user.email}</p>
-        `;
+    // Verifica se l'elemento è presente
+    if (userNameElement) {
+      auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        try {
+            const userDocRef = db.collection("users").doc(user.uid);
+            const userDoc = await userDocRef.get();
+            if (userDoc.exists) {
+                const userName = userDoc.data().nome;
+                userNameElement.textContent = userName || "Utente";
+            } else {
+                console.warn("Utente non trovato nel database");
+                userNameElement.textContent = "Utente Sconosciuto";
+            }
+        } catch (error) {
+            console.error("Errore durante il fetch:", error);
+            userNameElement.textContent = "Errore";
+        }
+    } else {
+        console.warn("Nessun utente autenticato");
+        userNameElement.textContent = "Guest";
     }
+});
+
+    } else {
+        console.warn("Elemento per il nome utente non trovato");
+    }
+
+    // Event listeners per i form
+    document.getElementById("logout-button")?.addEventListener("click", logoutUser);
+});
+
+function displayProfileInfo({ email, nome, cognome, dataNascita }) {
+    document.getElementById('profile-info').innerHTML = `
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Nome:</strong> ${nome}</p>
+        <p><strong>Cognome:</strong> ${cognome}</p>
+        <p><strong>Data di nascita:</strong> ${dataNascita}</p>
+    `;
+}
 
     function loadP5Params(userId) {
         console.log("Caricando i parametri per l'utente:", userId);
@@ -155,7 +225,43 @@
         });
     };
 
-    
+    function logoutUser() {
+    auth.signOut()
+        .then(() => {
+            console.log("Logout effettuato con successo!");
+            window.location.href = "login.html"; // Reindirizza alla pagina di login
+        })
+        .catch((error) => {
+            console.error("Errore durante il logout:", error);
+        });
+}
+
+// Funzione per aggiornare l'avatar con le iniziali
+document.addEventListener("DOMContentLoaded", () => {
+  auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    try {
+      const userDocRef = db.collection("users").doc(user.uid);
+      const userDoc = await userDocRef.get();
+
+      if (userDoc.exists) {
+        const userName = userDoc.data().nome || "U";
+        const userSurname = userDoc.data().cognome || "S";
+        const initials = `${userName[0]}${userSurname[0]}`.toUpperCase();
+
+        // Imposta il testo
+        document.querySelector("#user-avatar p").textContent = initials;
+      }
+    } catch (error) {
+      console.error("Errore nel recuperare i dati utente:", error);
+      document.querySelector("#user-avatar p").textContent = "??";
+    }
+  } else {
+    document.querySelector("#user-avatar p").textContent = "??";
+  }
+});
+  });
+
 </script>
 <script src="sketch2.js"></script>
 </html>

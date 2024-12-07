@@ -136,34 +136,30 @@ export async function registerUser(email, password, nome, cognome, dataNascita) 
 }
 
 // Funzione per aggiornare l'avatar con le iniziali
-onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        // Ottieni il documento dell'utente da Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-        
-        if (userDoc.exists()) {
-          const userName = userDoc.data().nome; // Prendi il nome
-          const userSurname = userDoc.data().cognome; // Prendi il cognome
-          
-          // Calcola le iniziali
-          const initials = (userName[0] + userSurname[0]).toUpperCase(); // Prima lettera del nome e cognome
-          
-          // Aggiorna l'avatar nel DOM con le iniziali
-          document.getElementById("user-avatar").textContent = initials;
-          
-          // (Opzionale) Aggiorna anche il nome visualizzato accanto all'avatar
-          document.querySelector(".hover\\:text-blue-500").textContent = userName;
+document.addEventListener("DOMContentLoaded", () => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+  
+          if (userDoc.exists()) {
+            const userName = userDoc.data().nome;
+            const userSurname = userDoc.data().cognome;
+            const initials = (userName[0] + userSurname[0]).toUpperCase();
+  
+            const avatarElement = document.getElementById("user-avatar");
+            avatarElement.querySelector("p").textContent = initials; // Aggiorna le iniziali
+          }
+        } catch (error) {
+          console.error("Errore nel recuperare i dati utente:", error);
         }
-      } catch (error) {
-        console.error("Errore nel recuperare i dati utente:", error);
+      } else {
+        document.getElementById("user-avatar").textContent = "??";
       }
-    } else {
-      // Se l'utente non è autenticato, puoi impostare un valore di default per l'avatar
-      document.getElementById("user-avatar").textContent = "??"; // Avatar di default
-    }
+    });
   });
+  
   
 
 // Funzione di logout utente

@@ -132,3 +132,4 @@ function downloadCanvas() {
 
   save(tempCanvas, `AXIS - ${today} - ${userID}.png`);
 }
+
