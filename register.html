@@ -9,135 +9,194 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
-<body class="bg-gradient-to-br w-screen h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to to-90% p-3 lg:p-4">
-
-    <!-- NAV -->
-    <div x-data="{ dropdown: false }">
-      <div
-        class="flex px-4 lg:px-6 py-1 lg:py-2 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
-      >
-        <div>
-          <a href="/index.html" class="hover:opacity-60 transition-opacity">
-            <img
-              src="./assets/svg/axis-logo.svg"
-              alt="logo axis"
-              class="h-8 lg:h-10 mt-2 mb-1 mx-1"
-            />
-          </a>
-        </div>
+<body>
+  <div 
+    class="relative bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"
+    x-data="{ termsOpen: false }"
+  >
+    <div class="flex flex-col mx-auto w-full max-w-screen-sm px-6">
+      <!-- Logo -->
+      <div class="flex m-auto">
+        <img 
+          src="./assets/svg/axis-logo.svg" 
+          alt="Axis Logo"
+          class="h-36 m-24 pointer-events-none"
+        />
+      </div>
     
-        <div class="flex items-center gap-3 text-base lg:text-xl ">
-          <div>
-            <p class=" hover:text-blue-500 transition-colors cursor-pointer"
-            @click="dropdown = !dropdown"
-            >
-              Edoardo
+      <!-- Registration Form -->
+      <div class="p-6 md:p-12 border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+        <h1 class="text-xl mb-8">Register</h1>
+    
+        <form id="register-form">
+          <div class="flex w-full space-x-4">
+            <!-- First Name -->
+            <div class="w-full">
+              <label class="mb-2 block" for="nome">Name</label>
+              <input 
+                type="text" 
+                id="nome"
+                name="nome"
+                required
+                placeholder="Edoardo"
+                class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+                focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+                peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+              />
+              <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+              transition-colors">
+                Name is required
+              </p>
+            </div>
+    
+            <!-- Last Name -->
+            <div class="w-full">
+              <label class="mb-2 block" for="cognome">Surname</label>
+              <input 
+                type="text" 
+                id="cognome"
+                name="cognome"
+                required
+                placeholder="Bignami"
+                class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+                focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+                peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+              />
+              <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+              transition-colors">
+                Surname is required
+              </p>
+            </div>
+          </div>
+    
+          <!-- Date of Birth -->
+          <label class="mb-2 block" for="dataNascita">Birthday</label>
+          <input 
+            type="date" 
+            id="dataNascita"
+            name="dataNascita"
+            required
+            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+            peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+          />
+          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          transition-colors">
+            Birthday is required, and you need to be at least 18 years old.
+          </p>
+    
+          <!-- Email -->
+          <label class="mb-2 block" for="email">E-mail</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            required
+            placeholder="example@domain.com"
+            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+            peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+          />
+          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          transition-colors">
+            Valid email is required.
+          </p>
+    
+          <!-- Password -->
+          <label class="mb-2 block" for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            required
+            placeholder="••••••••"
+            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
+            peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
+          />
+          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          transition-colors">
+            Password is required.
+          </p>
+    
+          <!-- Terms and Login -->
+          <div class="flex w-full justify-between items-center mb-12">
+            <div class="text-gray-400 flex items-center space-x-2">
+              <input 
+                type="checkbox" 
+                id="accept-terms"
+                required
+                class="peer border border-gray-200 rounded focus:ring-0 checked:bg-violet-500 
+                transition-colors"
+              />
+              <p class="peer-checked:text-violet-500 transition-colors -mr-1">
+                Accepts
+              </p>
+              <a 
+                href="#"
+                @click.prevent="termsOpen = true"
+                id="terms-link" 
+                class="underline hover:text-violet-500 transition-colors"
+              >
+                Terms and Conditions
+              </a>
+            </div>
+            <div>
+              <a href="login.html" class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold">
+                Login
+              </a>
+            </div>
+          </div>
+    
+          <!-- Submit Button -->
+          <button 
+            type="submit"
+            class="w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div 
+      id="terms-modal" 
+      x-show="termsOpen"
+      x-cloak
+      class="absolute top-0 left-0 w-screen h-screen bg-white/50 backdrop-blur-lg flex items-center z-10 px-6"
+    >
+      <div class="modal-content relative flex flex-col max-w-screen-sm p-12 mx-auto border-white border-x rounded-lg bg-white/50 backdrop-blur-lg shadow-md">
+        <div class="flex flex-col space-y-6">
+          <h2 class="text-3xl">Terms and Conditions</h2>
+          <div class="h-96 overflow-y-auto overflow-x-hidden border-white">
+            <p>
+              Welcome to AXIS. Please read the following Terms and Conditions carefully before using our Site. By using the Site, you agree to the terms outlined below.
+              <br><br>
+              1. Speculative Project: The Site is a speculative project developed as part of the Anthropology of Communications course. Its primary purpose is academic and research-oriented, and all data collected is used exclusively for the purpose of this project.
+              <br><br>
+              2. Data Collection and Management: The data collected through our Site is limited to the information stated on the various pages of the site, such as name, surname, date of birth, and responses to questions. These data are managed exclusively for research and analytical purposes, in line with the project's objectives. We do not collect or process sensitive data beyond what is specifically stated.
+              <br><br>
+              3. Responsibility: We assume no responsibility for any damages arising from the discovery or compromise of passwords or sensitive data entered by users. Although we implement appropriate security measures to protect data, we cannot guarantee complete protection against unauthorized access or data loss.
+              <br><br>
+              4. Limitation of Liability: We are not liable for any direct, indirect, incidental, special, or consequential damages arising from the use of the Site or the registration of data, nor for any technical issues or security breaches related to the Site.
+              <br><br>
+              5. Modifications to the Terms: We reserve the right to modify these Terms and Conditions at any time without notice. Any changes will take effect immediately upon publication on the Site.
             </p>
           </div>
-    
-          <div
-            class="bg-gray-300 rounded-full size-10 font-light text-slate-100 flex items-start cursor-pointer"
-            @click="dropdown = !dropdown"
+          <button 
+            type="button"
+            @click="termsOpen = false"
+            class="w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
           >
-            <p class="m-auto">EB</p>
-          </div>
-        </div>
-      </div>
-    
-      <div
-        class="flex absolute top-22 right-4 ml-auto flex-col mt-2 w-40 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
-        x-show="dropdown"
-        x-cloak
-        @click.away="dropdown = false"
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-50 "
-        x-transition:enter-end="opacity-100 "
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-50 "
-        style="display: none;"
-      >
-        <div class="w-full py-2 px-6">
-          <a href="/profile.html" class="hover:text-blue-500 transition-colors">
-            Profile
-          </a>
-        </div>
-        <div class="w-full py-2 px-6">
-          <a
-            href="/profile.html"
-            class="text-red-400 hover:text-red-600 transition-colors"
-          >
-            Logout
-          </a>
+            Close
+          </button>
         </div>
       </div>
     </div>
-
-
-    <h1>Registrati</h1>
-    <form id="register-form">
-        <form id="register-form">
-            <form id="register-form">
-                <label for="nome">Name:</label>
-                <input type="text" id="nome" required><br>
-            
-                <label for="cognome">Surname:</label>
-                <input type="text" id="cognome" required><br>
-            
-                <label for="dataNascita">Birthday:</label>
-                <input type="date" id="dataNascita" required><br>
-            
-                <label for="email">Email:</label>
-                <input type="email" id="email" required><br>
-            
-                <label for="password">Password:</label>
-                <input type="password" id="password" required><br>
-
-                <button type="submit">Register</button>
-            </form>
-
-            <label>
-                <input type="checkbox" id="terms-checkbox"> Accepts 
-                <a href="#" id="terms-link">Terms and Conditions</a>
-            </label>
-        
-        </form>
-    </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
-
-    <div id="terms-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close">&times;</span>
-            <h2>Terms and Conditions</h2>
-            <p>Welcome to AXIS. Please read the following Terms and Conditions carefully before using our Site. By using the Site, you agree to the terms outlined below.
-                <br>
-                1. Speculative Project The Site is a speculative project developed as part of the Anthropology of Communications course. Its primary purpose is academic and research-oriented, and all data collected is used exclusively for the purpose of this project.
-                <br>
-                2. Data Collection and Management The data collected through our Site is limited to the information stated on the various pages of the site, such as name, surname, date of birth, and responses to questions. These data are managed exclusively for research and analytical purposes, in line with the project's objectives. We do not collect or process sensitive data beyond what is specifically stated.
-                <br>
-                3. Responsibility We assume no responsibility for any damages arising from the discovery or compromise of passwords or sensitive data entered by users. Although we implement appropriate security measures to protect data, we cannot guarantee complete protection against unauthorized access or data loss.
-                <br>
-                4. Limitation of Liability We are not liable for any direct, indirect, incidental, special, or consequential damages arising from the use of the Site or the registration of data, nor for any technical issues or security breaches related to the Site.
-                <br>
-                5. Modifications to the Terms We reserve the right to modify these Terms and Conditions at any time without notice. Any changes will take effect immediately upon publication on the Site.
-                
-                </p>
-            <button id="accept-terms">Accept terms</button>
-        </div>
-    </div>
-
-    <script type="module" src="app.js"></script>
+  </div>
 </body>
 </html>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-          }
-        }
-      }
-    }
-</script>

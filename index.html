@@ -14,74 +14,74 @@
     <script type="module" src="app.js"></script> 
 
 </head>
-<body class="bg-gradient-to-br w-screen h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to to-90% p-3 lg:p-4">
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% p-3 lg:p-4">
 
   <!-- NAV -->
   <div x-data="{ dropdown: false }">
     <div
-      class="flex px-4 lg:px-6 py-1 lg:py-2 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+      class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
     >
       <div>
         <a href="/index.html" class="hover:opacity-60 transition-opacity">
           <img
             src="./assets/svg/axis-logo.svg"
             alt="logo axis"
-            class="h-8 lg:h-10 mt-2 mb-1 mx-1"
+            class="h-8 lg:h-10"
           />
         </a>
       </div>
   
       <div class="flex items-center gap-3 text-base lg:text-xl ">
         <div>
-          <p class=" hover:text-blue-500 transition-colors cursor-pointer"
-          @click="dropdown = !dropdown"
-          >
+          <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+          @click="dropdown = !dropdown">
             Loading...
           </p>
-      </div>
+        </div>
   
-      <div
-      class="bg-gray-300 rounded-full size-10 font-light text-slate-100 flex items-start cursor-pointer"
-      id="user-avatar"
-      @click="dropdown = !dropdown"
-    >
-      <p class="m-auto">??</p>
-    </div>
+        <div
+          class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+          id="user-avatar"
+          @click="dropdown = !dropdown"
+        >
+          <p class="text-lg font-medium">EB</p>
+        </div>
       </div>
     </div>
   
     <div
-      class="flex absolute top-22 right-4 ml-auto flex-col mt-2 w-40 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+      class="absolute top-16 right-4 w-40 z-50 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
       x-show="dropdown"
       x-cloak
       @click.away="dropdown = false"
       x-transition:enter="transition ease-out duration-200"
-      x-transition:enter-start="opacity-50 "
-      x-transition:enter-end="opacity-100 "
+      x-transition:enter-start="opacity-50 transform scale-95"
+      x-transition:enter-end="opacity-100 transform scale-100"
       x-transition:leave="transition ease-in duration-200"
-      x-transition:leave-start="opacity-100"
-      x-transition:leave-end="opacity-50 "
+      x-transition:leave-start="opacity-100 transform scale-100"
+      x-transition:leave-end="opacity-50 transform scale-95"
     >
       <div class="w-full py-2 px-6">
-        <a href="/profile.html" class="hover:text-blue-500 transition-colors">
+        <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
           Profile
         </a>
       </div>
       <div class="w-full py-2 px-6">
         <a
           id="logout-button"
-          class="text-red-400 hover:text-red-600 transition-colors"
+          class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
         >
           Logout
         </a>
       </div>
     </div>
   </div>
+
   
 
   <!-- CONTAINER -->
 
-  <div class="flex flex-col w-full mx-auto max-w-screen-xl my-8 lg:my-12">
+  <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-48 mb-8 lg:mb-12">
 
     
     <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
@@ -91,18 +91,143 @@
       <div class="">
 
       </div>
-      <a href="/form.html">FORM</a>
+      <a href="/form-n205812947.html">FORM</a>
       
     </div>
 
-    <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
-      <h1 class="text-4xl">
-        NEWS PROVA ATTENZIONE TROVATO MARIO PIAZZA IN COLOMBIA
-      </h1>
-      <div class="">
 
-      </div>
-      <a href="/news1.html">Open</a>
+
+    <!-- NEWS -->
+    <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 space-y-12">
+      <h1 class="text-4xl ">
+        News
+      </h1>
+
+      <!-- News 1 -->
+      <a href="/news/news1.html" 
+        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
+        >
+
+        <div class=" aspect-video rounded-2xl overflow-hidden">
+          <img 
+            src="assets/news/Piazza.jpg" 
+            alt="piazza" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          >
+        </div>
+      
+        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+            Trovato Mario Piazza a Bogotà
+          </h1>
+      
+          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare diam sit amet odio eleifend pretium. 
+            Vivamus ut risus vitae velit aliquam pulvinar sed laoreet felis. Donec at risus blandit, ullamcorper dui id, 
+            convallis nisl.
+          </p>
+      
+          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+            Read More &rarr;
+          </span>
+        </div>
+      </a>
+   
+
+      <!-- News 1 -->
+      <a href="/news/news1.html" 
+        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
+        >
+
+        <div class=" aspect-video rounded-2xl overflow-hidden">
+          <img 
+            src="assets/news/Piazza.jpg" 
+            alt="piazza" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          >
+        </div>
+      
+        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+            Trovato Mario Piazza a Bogotà
+          </h1>
+      
+          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare diam sit amet odio eleifend pretium. 
+            Vivamus ut risus vitae velit aliquam pulvinar sed laoreet felis. Donec at risus blandit, ullamcorper dui id, 
+            convallis nisl.
+          </p>
+      
+          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+            Read More &rarr;
+          </span>
+        </div>
+      </a>
+   
+
+      <!-- News 1 -->
+      <a href="/news/news1.html" 
+        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
+        >
+
+        <div class=" aspect-video rounded-2xl overflow-hidden">
+          <img 
+            src="assets/news/Piazza.jpg" 
+            alt="piazza" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          >
+        </div>
+      
+        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+            Trovato Mario Piazza a Bogotà
+          </h1>
+      
+          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare diam sit amet odio eleifend pretium. 
+            Vivamus ut risus vitae velit aliquam pulvinar sed laoreet felis. Donec at risus blandit, ullamcorper dui id, 
+            convallis nisl.
+          </p>
+      
+          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+            Read More &rarr;
+          </span>
+        </div>
+      </a>
+   
+
+      <!-- News 1 -->
+      <a href="/news/news1.html" 
+        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
+        >
+
+        <div class=" aspect-video rounded-2xl overflow-hidden">
+          <img 
+            src="assets/news/Piazza.jpg" 
+            alt="piazza" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          >
+        </div>
+      
+        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+            Trovato Mario Piazza a Bogotà
+          </h1>
+      
+          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare diam sit amet odio eleifend pretium. 
+            Vivamus ut risus vitae velit aliquam pulvinar sed laoreet felis. Donec at risus blandit, ullamcorper dui id, 
+            convallis nisl.
+          </p>
+      
+          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+            Read More &rarr;
+          </span>
+        </div>
+      </a>
+   
+
+
       
     </div>
 

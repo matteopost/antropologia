@@ -8,64 +8,62 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br w-screen h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to to-90% p-3 lg:p-4">
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% p-3 lg:p-4">
 
     <!-- NAV -->
     <div x-data="{ dropdown: false }">
       <div
-        class="flex px-4 lg:px-6 py-1 lg:py-2 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+        class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
       >
         <div>
           <a href="/index.html" class="hover:opacity-60 transition-opacity">
             <img
               src="./assets/svg/axis-logo.svg"
               alt="logo axis"
-              class="h-8 lg:h-10 mt-2 mb-1 mx-1"
+              class="h-8 lg:h-10"
             />
           </a>
         </div>
     
         <div class="flex items-center gap-3 text-base lg:text-xl ">
-            <div>
-                  <p class=" hover:text-blue-500 transition-colors cursor-pointer"
-                  @click="dropdown = !dropdown"
-                  >
-                    Loading...
-                  </p>
-              </div>
+          <div>
+            <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+            @click="dropdown = !dropdown">
+              Loading...
+            </p>
+          </div>
     
-              <div
-              class="bg-gray-300 rounded-full size-10 font-light text-slate-100 flex items-start cursor-pointer"
-              id="user-avatar"
-              @click="dropdown = !dropdown"
-            >
-              <p class="m-auto">??</p>
-            </div>
+          <div
+            class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+            id="user-avatar"
+            @click="dropdown = !dropdown"
+          >
+            <p class="text-lg font-medium">EB</p>
+          </div>
         </div>
       </div>
     
       <div
-        class="flex absolute top-22 right-4 ml-auto flex-col mt-2 w-40 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        class="absolute top-16 right-4 w-40 z-50 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
         x-show="dropdown"
         x-cloak
         @click.away="dropdown = false"
         x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-50 "
-        x-transition:enter-end="opacity-100 "
+        x-transition:enter-start="opacity-50 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
         x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-50 "
-        style="display: none;"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-50 transform scale-95"
       >
         <div class="w-full py-2 px-6">
-          <a href="/profile.html" class="hover:text-blue-500 transition-colors">
+          <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
             Profile
           </a>
         </div>
         <div class="w-full py-2 px-6">
           <a
-            href="/profile.html"
-            class="text-red-400 hover:text-red-600 transition-colors"
+            id="logout-button"
+            class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
           >
             Logout
           </a>
@@ -73,9 +71,16 @@
       </div>
     </div>
   
+  
+
+
+
+
+
+
     <!-- FROM -->
     <div class="container flex items-start m-auto gap-1 p-12 w-full max-w-screen-lg">
-        <div class="canvas-container flex items-center justify-center mx-4 relative">
+        <div class="canvas-container flex top-0 items-center justify-center mx-4 relative">
             <div class="absolute flex w-full h-full p-2 z-10 text-white font-mono ">
                 <div>
                     <p id="userID" class="bg-black/10 backdrop-blur-sm"></p>
@@ -86,7 +91,7 @@
         <div class="flex flex-col">
             <div class="text-lg font-bold mb-4 hidden">Current Score: <span id="score"></span></div>
             <div class="space-y-4">
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">School programs should not contain any cultural element other than the local one</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -98,7 +103,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Modern reinterpretations of traditional foods enhance your country's cultural heritage.</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -110,7 +115,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">The use of technology in the classroom is just a distraction camouflaged as innovation</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -122,7 +127,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Imposing self-defense courses in schools increases personal awareness even though it risks creating a culture of fear and defense instead of trust and respect</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -134,7 +139,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Guarantee a universal minimum wage could move society away from meritocratic principles</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -146,7 +151,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Increasing urban green areas, even at the expense of commercial infrastructure, is essential to improving the quality of life</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -158,7 +163,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Introducing a limit on water consumption is an excessive measure that does not address the real causes of the problem</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -170,7 +175,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Tougher taxes on polluters can spur positive change in the 
                         environment, even if they risk penalizing companies in a global market where other nations do not adopt similar policies</h3>
                     <div class="flex gap-2">
@@ -183,7 +188,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Restoration of cultural property is essential to preserving our history, 
                         although these resources could be better used to invest in the future</h3>
                     <div class="flex gap-2">
@@ -196,7 +201,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Teaching visual arts in compulsory schools is a distraction that pulls students away from more practical and useful skills for their future</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -208,7 +213,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Increasing the number of security cameras in cities is essential to improve public safety, even if it means a total loss of privacy</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -220,7 +225,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">The use of advanced technologies, such as drones and predictive software, by police is an effective measure to improve crime prevention</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -232,7 +237,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Making psychological support accessible feeds the false myth that everyone needs it</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -244,7 +249,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">The death penalty is a violation of human rights, even for those who have taken their lives</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -256,7 +261,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Growing organic food at home is just an unattainable ideal</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -268,7 +273,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Ensuring a public health system for all is a choice that puts economic stability at risk</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -280,7 +285,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Identifying genetic diseases in fetuses to enable abortion is a form of life selection</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -292,7 +297,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Providing asylum for those fleeing conflict or climate change, regardless of where they arrive, 
                         is a global duty that reflects a commitment to international solidarity and respect for human rights</h3>
                     <div class="flex gap-2">
@@ -305,7 +310,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Forcing each individual to publicly reveal his or her expenditures fosters trust in society even if it means establishing a system of total surveillance</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -317,7 +322,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Taxing companies for replacing jobs with AI is a fair measure to hold them accountable and mitigate the negative effects on employment</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -329,7 +334,7 @@
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md">
+                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
                     <h3 class="font-bold mb-2">Raising taxes on higher incomes is an encroachment on economic rights that rewards inefficiency rather than incentivizing productivity</h3>
                     <div class="flex gap-2">
                         <p class="font-light">Totally disagree</p>
@@ -345,11 +350,11 @@
 
                 <div class="">
                     <button 
-                     id="finish-form"
-                     onclick="downloadCanvas(); saveFormResponses();"
-                         class="py-1 px-3 border border-black rounded-full hover:border-blue-500
-                       hover:text-blue-500 transition-colors"
-                       >
+                    id="finish-form"
+                    onclick="downloadCanvas(); saveFormResponses();"
+                    class="py-1 px-3 border border-black rounded-full hover:border-blue-500
+                    hover:text-blue-500 transition-colors"
+                    >
                        Finished
                     </button>
                 </div>
