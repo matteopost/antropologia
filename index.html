@@ -14,12 +14,12 @@
     <script type="module" src="app.js"></script> 
 
 </head>
-<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% p-3 lg:p-4">
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% ">
 
   <!-- NAV -->
   <div x-data="{ dropdown: false }">
     <div
-      class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+      class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
     >
       <div>
         <a href="/index.html" class="hover:opacity-60 transition-opacity">
@@ -44,13 +44,13 @@
           id="user-avatar"
           @click="dropdown = !dropdown"
         >
-          <p class="text-lg font-medium">EB</p>
+          <p class="text-lg font-medium"></p>
         </div>
       </div>
     </div>
   
     <div
-      class="absolute top-16 right-4 w-40 z-50 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+      class="absolute top-20 right-3 lg:right-4 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
       x-show="dropdown"
       x-cloak
       @click.away="dropdown = false"
@@ -81,11 +81,15 @@
 
   <!-- CONTAINER -->
 
-  <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-48 mb-8 lg:mb-12">
+  <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-36 md:mt-40 lg:mt-48 mb-8 lg:mb-12">
+
+    <h1 class="text-4xl md:text-5xl lg:text-6xl mb-12 md:mb-16 lg:mb-24 font-light">
+      Home
+    </h1>
 
     
-    <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
-      <h1 class="text-4xl">
+    <div class="flex flex-col p-6 md:p-8 lg:p-12  justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
+      <h1 class="text-xl md:text-3xl lg:text-4xl">
         Join the future and become a citizen of Axis
       </h1>
       <div class="">
@@ -98,8 +102,8 @@
 
 
     <!-- NEWS -->
-    <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 space-y-12">
-      <h1 class="text-4xl ">
+    <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 space-y-12">
+      <h1 class="text-4xl">
         News
       </h1>
 
@@ -108,7 +112,7 @@
         class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
         >
 
-        <div class=" aspect-video rounded-2xl overflow-hidden">
+        <div class=" aspect-video rounded-2xl overflow-hidden grow">
           <img 
             src="assets/news/Piazza.jpg" 
             alt="piazza" 
@@ -116,7 +120,7 @@
           >
         </div>
       
-        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
           <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
             Trovato Mario Piazza a Bogotà
           </h1>
@@ -139,7 +143,7 @@
         class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
         >
 
-        <div class=" aspect-video rounded-2xl overflow-hidden">
+        <div class=" aspect-video rounded-2xl overflow-hidden grow">
           <img 
             src="assets/news/Piazza.jpg" 
             alt="piazza" 
@@ -147,7 +151,7 @@
           >
         </div>
       
-        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
           <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
             Trovato Mario Piazza a Bogotà
           </h1>
@@ -165,12 +169,13 @@
       </a>
    
 
+
       <!-- News 1 -->
       <a href="/news/news1.html" 
         class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
         >
 
-        <div class=" aspect-video rounded-2xl overflow-hidden">
+        <div class=" aspect-video rounded-2xl overflow-hidden grow">
           <img 
             src="assets/news/Piazza.jpg" 
             alt="piazza" 
@@ -178,7 +183,7 @@
           >
         </div>
       
-        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
           <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
             Trovato Mario Piazza a Bogotà
           </h1>
@@ -196,12 +201,14 @@
       </a>
    
 
+
+
       <!-- News 1 -->
       <a href="/news/news1.html" 
         class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
         >
 
-        <div class=" aspect-video rounded-2xl overflow-hidden">
+        <div class=" aspect-video rounded-2xl overflow-hidden grow">
           <img 
             src="assets/news/Piazza.jpg" 
             alt="piazza" 
@@ -209,7 +216,7 @@
           >
         </div>
       
-        <div class="flex flex-col justify-between md:ml-6 space-y-4 w-full md:w-2/3 lg:w-1/2">
+        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
           <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
             Trovato Mario Piazza a Bogotà
           </h1>
@@ -234,7 +241,7 @@
 
 
     <!-- FOOTER -->
-    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-300">
+    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
       <p>
         This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
         in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 

@@ -11,12 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% p-3 lg:p-4">
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
     <!-- NAV -->
     <div x-data="{ dropdown: false }">
       <div
-        class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+        class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
       >
         <div>
           <a href="/index.html" class="hover:opacity-60 transition-opacity">
@@ -41,13 +41,13 @@
             id="user-avatar"
             @click="dropdown = !dropdown"
           >
-            <p class="text-lg font-medium">EB</p>
+            <p class="text-lg font-medium"></p>
           </div>
         </div>
       </div>
     
       <div
-        class="absolute top-16 right-4 w-40 z-50 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        class="absolute top-20 right-3 lg:right-4 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
         x-show="dropdown"
         x-cloak
         @click.away="dropdown = false"
@@ -74,13 +74,45 @@
       </div>
     </div>
   
+    <div class="flex flex-col w-full mx-auto max-w-screen-lg mt-36 md:mt-40 lg:mt-48 mb-8 lg:mb-12">
+      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl mb-12 md:mb-16 lg:mb-24 font-light">
+          Profile
+        </h1>
+
+        <div id="profile-info">
+            <!-- Info utente mostrate qui -->
+        </div>
+
+        <div class="">
+          <div class="canvas-container flex items-center justify-center mx-4 relative"></div>
+        </div>
+
+      </div>
+
+
+
+
+      <!-- FOOTER -->
+      <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
+        <p>
+            This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
+            in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
+        </p>
+        <p>
+            We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
+            (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
+        </p>
+        <p>
+            This website is solely for university purposes and not for commercial use. It is a speculative project.
+        </p>
+        <p>
+            By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
+        </p>
+    </footer>
+    </div>
     
-    <div id="profile-info">
-        <!-- Info utente mostrate qui -->
-    </div>
-    <div class="canvas-container flex items-center justify-center mx-4 relative">
-        
-    </div>
 
 
 

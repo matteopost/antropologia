@@ -8,12 +8,16 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% p-3 lg:p-4">
+<!-- <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"> -->
+<body x-data="{ modalOpen: true }" x-bind:class="{ 'overflow-hidden': modalOpen }" class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
+
+ 
+
 
     <!-- NAV -->
     <div x-data="{ dropdown: false }">
       <div
-        class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+        class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
       >
         <div>
           <a href="/index.html" class="hover:opacity-60 transition-opacity">
@@ -38,13 +42,13 @@
             id="user-avatar"
             @click="dropdown = !dropdown"
           >
-            <p class="text-lg font-medium">EB</p>
+            <p class="text-lg font-medium"></p>
           </div>
         </div>
       </div>
     
       <div
-        class="absolute top-16 right-4 w-40 z-50 border-white border-x bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        class="absolute top-20 right-3 lg:right-4 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
         x-show="dropdown"
         x-cloak
         @click.away="dropdown = false"
@@ -72,277 +76,313 @@
     </div>
   
   
-
-
-
+    <div 
+        class="absolute top-0 left-0 w-screen h-screen bg-white/50 backdrop-blur-lg flex items-center z-50 px-6"
+        x-show="modalOpen"
+        x-cloak
+    >
+        <div class="modal-content relative flex flex-col max-w-screen-sm p-12 mx-auto border-white border rounded-lg bg-white/50 backdrop-blur-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Warning</h2>
+            <p class="text-gray-700 mb-6">This is a warning message for the user.</p>
+            <button 
+                class="w-full px-4 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600 transition-colors"
+                @click="modalOpen = false"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+ 
 
 
 
     <!-- FROM -->
-    <div class="container flex items-start m-auto gap-1 p-12 w-full max-w-screen-lg">
-        <div class="canvas-container flex top-0 items-center justify-center mx-4 relative">
-            <div class="absolute flex w-full h-full p-2 z-10 text-white font-mono ">
+    <div class="container flex max-md:flex-col items-start m-auto gap-1 p-3 mt-36 md:mt-40 lg:mt-48 w-full max-w-screen-lg">
+
+        <div class="canvas-container flex sticky top-24 md:top-28 max-md:w-full items-center justify-center mx-auto lm:mx-4 max-md:mb-4 max-md:z-40 p-6 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+            <!-- <div class="absolute flex w-full h-full p-8 z-10 text-white font-mono">
                 <div>
                     <p id="userID" class="bg-black/10 backdrop-blur-sm"></p>
                 </div>
-            </div>
+            </div> -->
         </div>
-
-        <div class="flex flex-col">
+        
+        <div class="flex flex-col md:ml-6">
             <div class="text-lg font-bold mb-4 hidden">Current Score: <span id="score"></span></div>
             <div class="space-y-4">
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">School programs should not contain any cultural element other than the local one</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 1</p>
+                    <h3 class="font-bold mb-10">School programs should not contain any cultural element other than the local one</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Modern reinterpretations of traditional foods enhance your country's cultural heritage.</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 2</p>
+                    <h3 class="font-bold mb-10">Modern reinterpretations of traditional foods enhance your country's cultural heritage.</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">The use of technology in the classroom is just a distraction camouflaged as innovation</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 3</p>
+                    <h3 class="font-bold mb-10">The use of technology in the classroom is just a distraction camouflaged as innovation</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Imposing self-defense courses in schools increases personal awareness even though it risks creating a culture of fear and defense instead of trust and respect</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 4</p>
+                    <h3 class="font-bold mb-10">Imposing self-defense courses in schools increases personal awareness even though it risks creating a culture of fear and defense instead of trust and respect</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Guarantee a universal minimum wage could move society away from meritocratic principles</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 5</p>
+                    <h3 class="font-bold mb-10">Guarantee a universal minimum wage could move society away from meritocratic principles</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Increasing urban green areas, even at the expense of commercial infrastructure, is essential to improving the quality of life</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 6</p>
+                    <h3 class="font-bold mb-10">Increasing urban green areas, even at the expense of commercial infrastructure, is essential to improving the quality of life</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Introducing a limit on water consumption is an excessive measure that does not address the real causes of the problem</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 7</p>
+                    <h3 class="font-bold mb-10">Introducing a limit on water consumption is an excessive measure that does not address the real causes of the problem</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Tougher taxes on polluters can spur positive change in the 
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 8</p>
+                    <h3 class="font-bold mb-10">Tougher taxes on polluters can spur positive change in the 
                         environment, even if they risk penalizing companies in a global market where other nations do not adopt similar policies</h3>
-                    <div class="flex gap-2">
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Restoration of cultural property is essential to preserving our history, 
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 9</p>
+                    <h3 class="font-bold mb-10">Restoration of cultural property is essential to preserving our history, 
                         although these resources could be better used to invest in the future</h3>
-                    <div class="flex gap-2">
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Teaching visual arts in compulsory schools is a distraction that pulls students away from more practical and useful skills for their future</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 10</p>
+                    <h3 class="font-bold mb-10">Teaching visual arts in compulsory schools is a distraction that pulls students away from more practical and useful skills for their future</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Increasing the number of security cameras in cities is essential to improve public safety, even if it means a total loss of privacy</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 11</p>
+                    <h3 class="font-bold mb-10">Increasing the number of security cameras in cities is essential to improve public safety, even if it means a total loss of privacy</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">The use of advanced technologies, such as drones and predictive software, by police is an effective measure to improve crime prevention</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 12</p>
+                    <h3 class="font-bold mb-10">The use of advanced technologies, such as drones and predictive software, by police is an effective measure to improve crime prevention</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Making psychological support accessible feeds the false myth that everyone needs it</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 13</p>
+                    <h3 class="font-bold mb-10">Making psychological support accessible feeds the false myth that everyone needs it</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">The death penalty is a violation of human rights, even for those who have taken their lives</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 14</p>
+                    <h3 class="font-bold mb-10">The death penalty is a violation of human rights, even for those who have taken their lives</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Growing organic food at home is just an unattainable ideal</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 15</p>
+                    <h3 class="font-bold mb-10">Growing organic food at home is just an unattainable ideal</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Ensuring a public health system for all is a choice that puts economic stability at risk</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 16</p>
+                    <h3 class="font-bold mb-10">Ensuring a public health system for all is a choice that puts economic stability at risk</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Identifying genetic diseases in fetuses to enable abortion is a form of life selection</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 17</p>
+                    <h3 class="font-bold mb-10">Identifying genetic diseases in fetuses to enable abortion is a form of life selection</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Providing asylum for those fleeing conflict or climate change, regardless of where they arrive, 
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 18</p>
+                    <h3 class="font-bold mb-10">Providing asylum for those fleeing conflict or climate change, regardless of where they arrive, 
                         is a global duty that reflects a commitment to international solidarity and respect for human rights</h3>
-                    <div class="flex gap-2">
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Forcing each individual to publicly reveal his or her expenditures fosters trust in society even if it means establishing a system of total surveillance</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 19</p>
+                    <h3 class="font-bold mb-10">Forcing each individual to publicly reveal his or her expenditures fosters trust in society even if it means establishing a system of total surveillance</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Taxing companies for replacing jobs with AI is a fair measure to hold them accountable and mitigate the negative effects on employment</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 20</p>
+                    <h3 class="font-bold mb-10">Taxing companies for replacing jobs with AI is a fair measure to hold them accountable and mitigate the negative effects on employment</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
-                <div class="flex flex-col p-6 md:p-12 justify-between border-white border-x bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-                    <h3 class="font-bold mb-2">Raising taxes on higher incomes is an encroachment on economic rights that rewards inefficiency rather than incentivizing productivity</h3>
-                    <div class="flex gap-2">
+                <div class="flex flex-col p-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <p class="text-sm text-slate-500 mb-1">Question 21</p>
+                    <h3 class="font-bold mb-10">Raising taxes on higher incomes is an encroachment on economic rights that rewards inefficiency rather than incentivizing productivity</h3>
+                    <div class="flex w-full justify-between items-center text-slate-500 text-xs mb-2">
                         <p class="font-light">Totally disagree</p>
-                        <label><input type="radio" name="density1" value="1"></label>
-                        <label><input type="radio" name="density1" value="2"></label>
-                        <label><input type="radio" name="density1" value="3"></label>
-                        <label><input type="radio" name="density1" value="4"></label>
-                        <label><input type="radio" name="density1" value="5"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="1"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="2"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="3"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="4"></label>
+                        <label class="-mb-1"><input type="radio" name="density1" class="size-4 md:size-5"  value="5"></label>
                         <p class="font-light">Totally agree</p>
                     </div>
                 </div>
@@ -355,15 +395,31 @@
                     class="py-1 px-3 border border-black rounded-full hover:border-blue-500
                     hover:text-blue-500 transition-colors"
                     >
-                       Finished
+                    Finished
                     </button>
                 </div>
-                
-
-
             </div>
         </div>
     </div>
+
+
+    <!-- FOOTER -->
+    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
+        <p>
+            This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
+            in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
+        </p>
+        <p>
+            We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
+            (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
+        </p>
+        <p>
+            This website is solely for university purposes and not for commercial use. It is a speculative project.
+        </p>
+        <p>
+            By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
+        </p>
+    </footer>
 
 
     <script>

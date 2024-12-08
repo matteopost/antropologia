@@ -7,7 +7,7 @@ function setup() {
   window.p5Instance = this; 
 
   const canvasParent = document.querySelector('.canvas-container');
-  createCanvas(300, 300).parent(canvasParent);
+  createCanvas(250, 250).parent(canvasParent);
 
   angleMode(DEGREES);
   d = pixelDensity();
