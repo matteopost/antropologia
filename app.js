@@ -127,7 +127,6 @@ export async function registerUser(email, password, nome, cognome, dataNascita) 
             lastLogin: serverTimestamp()   // Timestamp dell'ultimo login (inizialmente quando viene creato)
         }, { merge: true });
 
-        alert("Registrazione avvenuta con successo! Ora effettua il login.");
         window.location.href = "login.html";
     } catch (error) {
         console.error("Errore durante la registrazione:", error);
@@ -211,7 +210,6 @@ async function saveResponses() {
             answers: responses,
             p5Params: p5Params
         });
-        alert("Risposte e parametri salvati con successo!");
     } catch (error) {
         console.error("Errore nel salvataggio delle risposte:", error);
         alert("Errore: " + error.message);
