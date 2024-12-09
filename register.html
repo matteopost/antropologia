@@ -16,36 +16,36 @@
     class="relative bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"
     x-data="{ termsOpen: false }"
   >
-    <div class="flex flex-col mx-auto w-full max-w-screen-sm px-6">
-      <!-- Logo -->
+    <div class="flex flex-col mx-auto w-full max-w-screen-sm px-3 md:px-6">
+    <!-- Logo -->
       <div class="flex m-auto">
         <img 
-          src="./assets/svg/axis-logo.svg" 
-          alt="Axis Logo"
-          class="h-36 m-24 pointer-events-none"
-        />
-      </div>
+        src="./assets/svg/axis-logo.svg" 
+        alt="logo axis"
+        class="h-24 md:h-32 lg:h-36 my-16 md:my-20 lg:my-24 pointer-events-none"
+        >
+     </div>
     
       <!-- Registration Form -->
       <div class="p-6 md:p-8 lg:p-12 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-        <h1 class="text-xl mb-8">Register</h1>
+        <h1 class="text-xl md:text-2xl lg:text-3xl mb-8">Register your Axis account</h1>
     
         <form id="register-form">
           <div class="flex w-full space-x-4">
             <!-- First Name -->
             <div class="w-full">
-              <label class="mb-2 block" for="nome">Name</label>
+              <label class="mb-2 block text-sm md:text-base" for="nome">Name</label>
               <input 
                 type="text" 
                 id="nome"
                 name="nome"
                 required
                 placeholder="Edoardo"
-                class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+                class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
                 focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
                 peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
               />
-              <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+              <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
               transition-colors">
                 Name is required
               </p>
@@ -53,18 +53,18 @@
     
             <!-- Last Name -->
             <div class="w-full">
-              <label class="mb-2 block" for="cognome">Surname</label>
+              <label class="mb-2 block text-sm md:text-base" for="cognome">Surname</label>
               <input 
                 type="text" 
                 id="cognome"
                 name="cognome"
                 required
                 placeholder="Bignami"
-                class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+                class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
                 focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
                 peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
               />
-              <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+              <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
               transition-colors">
                 Surname is required
               </p>
@@ -72,58 +72,58 @@
           </div>
     
           <!-- Date of Birth -->
-          <label class="mb-2 block" for="dataNascita">Birthday</label>
+          <label class="mb-2 block text-sm md:text-base" for="dataNascita">Birthday</label>
           <input 
             type="date" 
             id="dataNascita"
             name="dataNascita"
             required
-            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
             focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
             peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
           />
-          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
           transition-colors">
-            Birthday is required, and you need to be at least 18 years old.
+            You need to be at least 18 years old.
           </p>
     
           <!-- Email -->
-          <label class="mb-2 block" for="email">E-mail</label>
+          <label class="mb-2 block text-sm md:text-base" for="email">E-mail</label>
           <input 
             type="email" 
             id="email" 
             name="email"
             required
             placeholder="example@domain.com"
-            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
             focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
             peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
           />
-          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
           transition-colors">
             Valid email is required.
           </p>
     
           <!-- Password -->
-          <label class="mb-2 block" for="password">Password</label>
+          <label class="mb-2 block text-sm md:text-base" for="password">Password</label>
           <input 
             type="password" 
             id="password" 
             name="password"
             required
             placeholder="••••••••"
-            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
             focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
             peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
           />
-          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
           transition-colors">
             Password is required.
           </p>
     
           <!-- Terms and Login -->
           <div class="flex w-full justify-between items-center mb-12">
-            <div class="text-gray-400 flex items-center space-x-2">
+            <div class="text-gray-400 flex items-center">
               <input 
                 type="checkbox" 
                 id="accept-terms"
@@ -131,20 +131,20 @@
                 class="peer border border-gray-200 rounded focus:ring-0 checked:bg-violet-500 
                 transition-colors"
               />
-              <p class="peer-checked:text-violet-500 transition-colors -mr-1">
-                Accepts
+              <p class="peer-checked:text-violet-500 transition-colors text-sm md:text-base">
+                &nbsp&nbspAccepts&nbsp
               </p>
               <a 
                 href="#"
                 @click.prevent="termsOpen = true"
                 id="terms-link" 
-                class="underline hover:text-violet-500 transition-colors"
+                class="underline hover:text-violet-500 peer-checked:text-violet-500 transition-colors text-sm md:text-base"
               >
-                Terms and Conditions
+               Terms and Conditions
               </a>
             </div>
             <div>
-              <a href="login.html" class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold">
+              <a href="login.html" class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold text-sm md:text-base">
                 Login
               </a>
             </div>
@@ -162,32 +162,15 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
-        <p>
-            This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
-            in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
-        </p>
-        <p>
-            We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
-            (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
-        </p>
-        <p>
-            This website is solely for university purposes and not for commercial use. It is a speculative project.
-        </p>
-        <p>
-            By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
-        </p>
-    </footer>
-
+ 
     <!-- Terms Modal -->
     <div 
       id="terms-modal" 
       x-show="termsOpen"
       x-cloak
-      class="absolute top-0 left-0 w-screen h-screen bg-white/50 backdrop-blur-lg flex items-center z-10 px-6"
+      class="absolute top-0 left-0 w-screen h-full bg-white/50 backdrop-blur-lg flex items-center z-10 px-3 md:px-6"
     >
-      <div class="modal-content relative flex flex-col max-w-screen-sm p-12 mx-auto border-white border rounded-lg bg-white/50 backdrop-blur-lg shadow-md">
+      <div class="modal-content relative flex flex-col max-w-screen-sm p-6 md:p-12 mx-auto border-white border rounded-lg bg-white/50 backdrop-blur-lg shadow-md">
         <div class="flex flex-col space-y-6">
           <h2 class="text-3xl">Terms and Conditions</h2>
           <div class="h-96 overflow-y-auto overflow-x-hidden border-white">

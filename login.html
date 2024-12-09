@@ -12,27 +12,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-b w-screen h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to to-90%">
-  <div class="flex flex-col mx-auto w-full max-w-screen-sm px-6">
+  <div class="flex flex-col mx-auto w-full max-w-screen-sm px-3 md:px-6">
 
     <!-- Logo -->
      <div class="flex m-auto">
       <img 
       src="./assets/svg/axis-logo.svg" 
       alt="logo axis"
-      class="h-36 m-24 pointer-events-none"
+      class="h-24 md:h-32 lg:h-36 my-16 md:my-20 lg:my-24 pointer-events-none"
       >
      </div>
 
 
      <!-- Login -->
      <div class="p-6 md:p-8 lg:p-12 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
-      <h1 class="text-xl mb-8">
-        Sign in to your account
+      <h1 class="text-xl md:text-2xl lg:text-3xl  mb-8">
+        Sign in to your Axis account
       </h1>
 
       <form id="login-form">
         <div class="mb-3">
-          <h1 class="mb-2">
+          <h1 class="mb-2 block text-sm md:text-base">
             E-mail
           </h1>
         
@@ -41,17 +41,17 @@
             id="email" 
             required
             placeholder="adress@axis.com"
-            class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
             focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
             peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
           />
-          <p class="mt-1 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+          <p class="mt-1 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
           transition-colors">
             Please enter a valid email address.
           </p>
         </div>
         
-        <h1 class="mb-2">
+        <h1 class="mb-2 block text-sm md:text-base">
           Password
         </h1>
       
@@ -59,11 +59,11 @@
           type="password" 
           id="password" 
           required
-          class="peer w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+          class="peer w-full px-4 md:px-4 py-1 md:py-2 bg-transparent border border-gray-300 rounded-lg 
           focus:border-violet-500 focus:outline-none focus:placeholder:text-gray-300 
           peer-invalid:border-red-500 peer-invalid:focus:border-red-500 transition-colors"
         />
-        <p class="mt-1 mb-2 text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
+        <p class="mt-1 mb-2 text-xs md:text-sm text-red-500 invisible peer-invalid:peer-focus:visible 
         transition-colors">
           Password is required.
         </p>
@@ -76,7 +76,7 @@
               class="peer border border-gray-200 rounded focus:ring-0 checked:bg-violet-500 
               transition-colors "
             >
-            <label class="peer-checked:text-violet-500 transition-colors">
+            <label class="peer-checked:text-violet-500 transition-colors text-sm md:text-base">
               Remember me
             </label>
           </div>
@@ -84,7 +84,7 @@
           
           <div class="">
             <a href="register.html"
-            class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold"
+            class="text-violet-500 hover:underline hover:underline-offset-2 font-semibold text-sm md:text-base"
             >
               Register
             </a>
@@ -100,35 +100,7 @@
             Login
           </button>
         </div>
-
-
-
-
-        
-        
-
-
-          
       </form>
-
-      <!-- FOOTER -->
-      <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
-          <p>
-              This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
-              in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
-          </p>
-          <p>
-              We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
-              (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
-          </p>
-          <p>
-              This website is solely for university purposes and not for commercial use. It is a speculative project.
-          </p>
-          <p>
-              By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
-          </p>
-      </footer>
-      
     </div>
   </div>
     <script type="module" src="app.js"></script>
