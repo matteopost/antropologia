@@ -11,10 +11,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="app.js"></script>
 </head>
-<body>
+<body x-data="{ termsOpen: false }" x-bind:class="{ 'overflow-hidden': termsOpen }">
   <div 
     class="relative bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"
-    x-data="{ termsOpen: false }"
   >
     <div class="flex flex-col mx-auto w-full max-w-screen-sm px-3 md:px-6">
     <!-- Logo -->

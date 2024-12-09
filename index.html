@@ -17,40 +17,39 @@
 <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% ">
 
   <!-- NAV -->
-  <div x-data="{ dropdown: false }">
-    <div
-      class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
-    >
+  <div
+    x-data="{ dropdown: false }"
+    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+  >
+    <div>
+      <a href="/index.html" class="hover:opacity-60 transition-opacity">
+        <img
+          src="./assets/svg/axis-logo.svg"
+          alt="logo axis"
+          class="h-8 lg:h-10"
+        />
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3 text-base lg:text-xl ">
       <div>
-        <a href="/index.html" class="hover:opacity-60 transition-opacity">
-          <img
-            src="./assets/svg/axis-logo.svg"
-            alt="logo axis"
-            class="h-8 lg:h-10"
-          />
-        </a>
+        <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+        @click="dropdown = !dropdown">
+          Loading...
+        </p>
       </div>
-  
-      <div class="flex items-center gap-3 text-base lg:text-xl ">
-        <div>
-          <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
-          @click="dropdown = !dropdown">
-            Loading...
-          </p>
-        </div>
-  
-        <div
-          class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
-          id="user-avatar"
-          @click="dropdown = !dropdown"
-        >
-          <p class="text-lg font-medium"></p>
-        </div>
+
+      <div
+        class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+        id="user-avatar"
+        @click="dropdown = !dropdown"
+      >
+        <p class="text-lg font-medium"></p>
       </div>
     </div>
-  
+
     <div
-      class="absolute top-20 right-3 lg:right-4 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+      class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
       x-show="dropdown"
       x-cloak
       @click.away="dropdown = false"
@@ -76,6 +75,7 @@
       </div>
     </div>
   </div>
+  
 
   
 
@@ -83,19 +83,35 @@
 
   <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-36 md:mt-40 lg:mt-48 mb-8 lg:mb-12">
 
-    <h1 class="text-4xl md:text-5xl lg:text-6xl mb-12 md:mb-16 lg:mb-24 font-light">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl mb-12 md:mb-16 lg:mb-24">
       Home
     </h1>
 
     
     <div class="flex flex-col p-6 md:p-8 lg:p-12  justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
+
+
+
       <h1 class="text-xl md:text-3xl lg:text-4xl">
         Join the future and become a citizen of Axis
       </h1>
-      <div class="">
 
-      </div>
-      <a href="/form-n205812947.html">FORM</a>
+      <div class="text-center">
+        <p class="text-lg font-medium text-gray-700">You have until:</p>
+        <div id="countdown" class="text-3xl font-bold text-blue-600 mt-2"></div>
+    </div>
+
+
+      <!-- <div class="bg-slate-400 aspect-video w-full my-4 rounded-2xl"></div> -->
+      <a href="/form-n205812947.html">
+        <button 
+          type="submit"
+          class=" px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+          hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
+        >
+          Form
+        </button>
+      </a>
       
     </div>
 
@@ -274,3 +290,26 @@
     }
 </script>
 
+<script>
+  function updateCountdown() {
+    const targetDate = new Date("2024-12-18T14:15:00");
+    const now = new Date();
+    const timeDiff = targetDate - now;
+
+    if (timeDiff <= 0) {
+        document.getElementById("countdown").innerText = "The countdown has ended!";
+        clearInterval(interval);
+        return;
+    }
+
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerText =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  const interval = setInterval(updateCountdown, 1000);
+  updateCountdown(); 
+</script>
