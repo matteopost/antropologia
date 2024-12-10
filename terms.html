@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" class="antialiased">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+    <script type="module" src="app.js"></script>
+</head>
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
+
+  <!-- NAV -->
+  <div
+    x-data="{ dropdown: false }"
+    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 "
+  >
+  <div class="flex justify-between items-center max-w-screen-2xl mx-auto border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md px-4 lg:px-6 py-3  ">
+      <div>
+        <a href="/index.html" class="hover:opacity-60 transition-opacity">
+          <img
+            src="./assets/svg/axis-logo.svg"
+            alt="logo axis"
+            class="h-8 lg:h-10"
+          />
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 text-base lg:text-xl">
+        <div>
+          <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+          @click="dropdown = !dropdown">
+            Loading...
+          </p>
+        </div>
+
+        <div
+          class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+          id="user-avatar"
+          @click="dropdown = !dropdown"
+        >
+          <p class="text-lg font-medium"></p>
+        </div>
+      </div>
+
+      <div
+        class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        x-show="dropdown"
+        x-cloak
+        @click.away="dropdown = false"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-50 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-50 transform scale-95"
+      >
+        <div class="w-full py-2 px-6">
+          <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
+            Profile
+          </a>
+        </div>
+        <div class="w-full py-2 px-6">
+          <a
+            id="logout-button"
+            class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <!-- CONTAINER -->
+  <div class="flex flex-col w-full mx-auto max-lg:max-w-screen-md max-w-screen-xl mt-20 md:mt-24 lg:mt-32 mb-8 lg:mb-12 px-3 md:px-4">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl my-6 md:my-8 lg:my-10 ">
+        Terms and conditions
+    </h1>
+
+    <!-- WRAPPER FOR COUNTDOWN AND NEWS -->
+    <div class="flex flex-col lg:flex-row gap-6">
+        <!-- COUNTDOWN CONTAINER -->
+        <div class="w-full">
+            <div class="flex flex-col p-6 md:p-8 xl:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 lg:mb-0 flex-1">
+            <div class="">
+                <p>
+                  Welcome to AXIS. Please read the following Terms and Conditions carefully before using our Site. By using the Site, you agree to the terms outlined below.
+                  <br><br>
+                  1. Speculative Project: The Site is a speculative project developed as part of the Anthropology of Communications course. Its primary purpose is academic and research-oriented, and all data collected is used exclusively for the purpose of this project.
+                  <br><br>
+                  2. Data Collection and Management: The data collected through our Site is limited to the information stated on the various pages of the site, such as name, surname, date of birth, and responses to questions. These data are managed exclusively for research and analytical purposes, in line with the project's objectives. We do not collect or process sensitive data beyond what is specifically stated.
+                  <br><br>
+                  3. Responsibility: We assume no responsibility for any damages arising from the discovery or compromise of passwords or sensitive data entered by users. Although we implement appropriate security measures to protect data, we cannot guarantee complete protection against unauthorized access or data loss.
+                  <br><br>
+                  4. Limitation of Liability: We are not liable for any direct, indirect, incidental, special, or consequential damages arising from the use of the Site or the registration of data, nor for any technical issues or security breaches related to the Site.
+                  <br><br>
+                  5. Modifications to the Terms: We reserve the right to modify these Terms and Conditions at any time without notice. Any changes will take effect immediately upon publication on the Site.
+                </p>
+              </div>
+            <a href="/index.html">
+                <button
+                type="submit"
+                class="mt-12 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+                hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm"
+                >
+                Home
+                </button>
+            </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+          }
+        }
+      }
+    }
+</script>

@@ -90,7 +90,7 @@
       </script>
 </head>
 <!-- <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"> -->
-<body x-data="{ modalOpen: false }" x-bind:class="{ 'overflow-hidden': modalOpen }" class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
+<body x-data="{ modalOpen: true }" x-bind:class="{ 'overflow-hidden': modalOpen }" class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
  
 
@@ -98,62 +98,65 @@
   <!-- NAV -->
   <div
     x-data="{ dropdown: false }"
-    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 "
   >
-    <div>
-      <a href="/index.html" class="hover:opacity-60 transition-opacity">
-        <img
-          src="./assets/svg/axis-logo.svg"
-          alt="logo axis"
-          class="h-8 lg:h-10"
-        />
-      </a>
-    </div>
-
-    <div class="flex items-center gap-3 text-base lg:text-xl ">
+  <div class="flex justify-between items-center max-w-screen-2xl mx-auto border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md px-4 lg:px-6 py-3  ">
       <div>
-        <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
-        @click="dropdown = !dropdown">
-          Loading...
-        </p>
+        <a href="/index.html" class="hover:opacity-60 transition-opacity">
+          <img
+            src="./assets/svg/axis-logo.svg"
+            alt="logo axis"
+            class="h-8 lg:h-10"
+          />
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 text-base lg:text-xl">
+        <div>
+          <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+          @click="dropdown = !dropdown">
+            Loading...
+          </p>
+        </div>
+
+        <div
+          class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+          id="user-avatar"
+          @click="dropdown = !dropdown"
+        >
+          <p class="text-lg font-medium"></p>
+        </div>
       </div>
 
       <div
-        class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
-        id="user-avatar"
-        @click="dropdown = !dropdown"
+        class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        x-show="dropdown"
+        x-cloak
+        @click.away="dropdown = false"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-50 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-50 transform scale-95"
       >
-        <p class="text-lg font-medium"></p>
+        <div class="w-full py-2 px-6">
+          <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
+            Profile
+          </a>
+        </div>
+        <div class="w-full py-2 px-6">
+          <a
+            id="logout-button"
+            class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
+          >
+            Logout
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div
-      class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
-      x-show="dropdown"
-      x-cloak
-      @click.away="dropdown = false"
-      x-transition:enter="transition ease-out duration-200"
-      x-transition:enter-start="opacity-50 transform scale-95"
-      x-transition:enter-end="opacity-100 transform scale-100"
-      x-transition:leave="transition ease-in duration-200"
-      x-transition:leave-start="opacity-100 transform scale-100"
-      x-transition:leave-end="opacity-50 transform scale-95"
-    >
-      <div class="w-full py-2 px-6">
-        <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
-          Profile
-        </a>  
-      </div>
-      <div class="w-full py-2 px-6">
-        <a
-          id="logout-button"
-          class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
-        >
-          Logout
-        </a>
-      </div>
-    </div>
+    </div> 
   </div>
+
   
     <div 
         class="absolute top-0 left-0 w-screen h-screen bg-white/50 backdrop-blur-lg flex items-center z-50 px-6"
@@ -162,13 +165,29 @@
     >
         <div class="modal-content relative flex flex-col max-w-screen-sm p-12 mx-auto border-white border rounded-lg bg-white/50 backdrop-blur-lg shadow-md">
             <h2 class="text-xl font-semibold mb-4">Warning</h2>
-            <p class="text-gray-700 mb-6">Remember, every decision make a consequence.</p>
+            <div class="h-96 overflow-y-auto overflow-x-hidden border-white">
+                <p>
+                Please read the following Terms and Conditions carefully before using our Site. By using the Site, you agree to the terms outlined below.
+                  <br><br>
+                  1. Speculative Project: The Site is a speculative project developed as part of the Anthropology of Communications course. Its primary purpose is academic and research-oriented, and all data collected is used exclusively for the purpose of this project.
+                  <br><br>
+                  2. Data Collection and Management: The data collected through our Site is limited to the information stated on the various pages of the site, such as name, surname, date of birth, and responses to questions. These data are managed exclusively for research and analytical purposes, in line with the project's objectives. We do not collect or process sensitive data beyond what is specifically stated.
+                  <br><br>
+                  3. Responsibility: We assume no responsibility for any damages arising from the discovery or compromise of passwords or sensitive data entered by users. Although we implement appropriate security measures to protect data, we cannot guarantee complete protection against unauthorized access or data loss.
+                  <br><br>
+                  4. Limitation of Liability: We are not liable for any direct, indirect, incidental, special, or consequential damages arising from the use of the Site or the registration of data, nor for any technical issues or security breaches related to the Site.
+                  <br><br>
+                  5. Modifications to the Terms: We reserve the right to modify these Terms and Conditions at any time without notice. Any changes will take effect immediately upon publication on the Site.
+                </p>
+              </div>
             <button 
-                class="w-full px-4 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600 transition-colors"
-                @click="modalOpen = false"
-            >
-                Close
-            </button>
+            type="button"
+            @click="modalOpen = false"
+            class="w-full px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm mt-6"
+          >
+            Close
+          </button>
         </div>
     </div>
  
