@@ -133,6 +133,10 @@ function saveFormResponses() {
   console.log(responses);  // A questo punto puoi inviare questi dati al server o salvarli dove necessario
 }
 
+// Espone la funzione saveFormResponses nel contesto globale
+window.saveFormResponses = saveFormResponses;
+
+
 /*
 function downloadCanvas() {
   const today = getTodayDate();
@@ -150,58 +154,3 @@ function downloadCanvas() {
   save(tempCanvas, `AXIS - ${today} - ${userID}.png`);
 }
   */
-
-function downloadCanvas() {
-  const today = getTodayDate();
-  const title = "Welcome in Axis!"; // Aggiungi il titolo desiderato
-  const borderSize = 20; // Dimensione del bordo bianco
-  const cornerRadius = 10; // Raggio dei bordi arrotondati
-
-  // Crea un canvas temporaneo con una risoluzione più alta
-  let tempCanvas = createGraphics(width * 2, height * 2);
-
-  // Disegna lo sfondo bianco generale
-  tempCanvas.background(255);
-
-  // Disegna il bordo bianco con angoli arrotondati
-  tempCanvas.noFill();
-  tempCanvas.stroke(255);
-  tempCanvas.strokeWeight(borderSize * 2);
-  tempCanvas.beginShape();
-  tempCanvas.vertex(borderSize + cornerRadius, borderSize);
-  tempCanvas.vertex(width * 2 - borderSize - cornerRadius, borderSize);
-  tempCanvas.quadraticVertex(width * 2 - borderSize, borderSize, width * 2 - borderSize, borderSize + cornerRadius);
-  tempCanvas.vertex(width * 2 - borderSize, height * 2 - borderSize - cornerRadius);
-  tempCanvas.quadraticVertex(width * 2 - borderSize, height * 2 - borderSize, width * 2 - borderSize - cornerRadius, height * 2 - borderSize);
-  tempCanvas.vertex(borderSize + cornerRadius, height * 2 - borderSize);
-  tempCanvas.quadraticVertex(borderSize, height * 2 - borderSize, borderSize, height * 2 - borderSize - cornerRadius);
-  tempCanvas.vertex(borderSize, borderSize + cornerRadius);
-  tempCanvas.quadraticVertex(borderSize, borderSize, borderSize + cornerRadius, borderSize);
-  tempCanvas.endShape(CLOSE);
-
-  // Disegna l'immagine con bordi arrotondati
-  tempCanvas.noStroke();
-  tempCanvas.beginShape();
-  tempCanvas.vertex(borderSize + cornerRadius, borderSize + 50);
-  tempCanvas.vertex(width * 2 - borderSize - cornerRadius, borderSize + 50);
-  tempCanvas.quadraticVertex(width * 2 - borderSize, borderSize + 50, width * 2 - borderSize, borderSize + cornerRadius + 50);
-  tempCanvas.vertex(width * 2 - borderSize, height * 2 - borderSize - cornerRadius);
-  tempCanvas.quadraticVertex(width * 2 - borderSize, height * 2 - borderSize, width * 2 - borderSize - cornerRadius, height * 2 - borderSize);
-  tempCanvas.vertex(borderSize + cornerRadius, height * 2 - borderSize);
-  tempCanvas.quadraticVertex(borderSize, height * 2 - borderSize, borderSize, height * 2 - borderSize - cornerRadius);
-  tempCanvas.vertex(borderSize, borderSize + cornerRadius + 50);
-  tempCanvas.quadraticVertex(borderSize, borderSize + 50, borderSize + cornerRadius, borderSize + 50);
-  tempCanvas.endShape(CLOSE);
-
-  // Disegna l'immagine
-  tempCanvas.image(get(), borderSize, borderSize + 50, width * 2 - borderSize * 2, height * 2 - borderSize * 2 - 50);
-
-  // Disegna il titolo sopra l'immagine
-  tempCanvas.fill(0); // Testo nero
-  tempCanvas.textSize(18); // Dimensione del testo
-  tempCanvas.textAlign(CENTER, TOP); // Allineamento del testo
-  tempCanvas.text(title, width, borderSize + 10); // Disegna il titolo
-
-  // Salva il canvas con il titolo e l'immagine
-  save(tempCanvas, `AXIS - ${today} - ${userID}.png`);
-}
