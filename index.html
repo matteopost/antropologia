@@ -17,106 +17,108 @@
   <!-- NAV -->
   <div
     x-data="{ dropdown: false }"
-    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 flex px-4 lg:px-6 py-3 justify-between items-center border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md"
+    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 "
   >
-    <div>
-      <a href="/index.html" class="hover:opacity-60 transition-opacity">
-        <img
-          src="./assets/svg/axis-logo.svg"
-          alt="logo axis"
-          class="h-8 lg:h-10"
-        />
-      </a>
-    </div>
-
-    <div class="flex items-center gap-3 text-base lg:text-xl">
+  <div class="flex justify-between items-center max-w-screen-2xl mx-auto border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md px-4 lg:px-6 py-3  ">
       <div>
-        <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
-        @click="dropdown = !dropdown">
-          Loading...
-        </p>
+        <a href="/index.html" class="hover:opacity-60 transition-opacity">
+          <img
+            src="./assets/svg/axis-logo.svg"
+            alt="logo axis"
+            class="h-8 lg:h-10"
+          />
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 text-base lg:text-xl">
+        <div>
+          <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+          @click="dropdown = !dropdown">
+            Loading...
+          </p>
+        </div>
+
+        <div
+          class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+          id="user-avatar"
+          @click="dropdown = !dropdown"
+        >
+          <p class="text-lg font-medium"></p>
+        </div>
       </div>
 
       <div
-        class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
-        id="user-avatar"
-        @click="dropdown = !dropdown"
+        class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+        x-show="dropdown"
+        x-cloak
+        @click.away="dropdown = false"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-50 transform scale-95"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-50 transform scale-95"
       >
-        <p class="text-lg font-medium"></p>
+        <div class="w-full py-2 px-6">
+          <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
+            Profile
+          </a>
+        </div>
+        <div class="w-full py-2 px-6">
+          <a
+            id="logout-button"
+            class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
+          >
+            Logout
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div
-      class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
-      x-show="dropdown"
-      x-cloak
-      @click.away="dropdown = false"
-      x-transition:enter="transition ease-out duration-200"
-      x-transition:enter-start="opacity-50 transform scale-95"
-      x-transition:enter-end="opacity-100 transform scale-100"
-      x-transition:leave="transition ease-in duration-200"
-      x-transition:leave-start="opacity-100 transform scale-100"
-      x-transition:leave-end="opacity-50 transform scale-95"
-    >
-      <div class="w-full py-2 px-6">
-        <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
-          Profile
-        </a>
-      </div>
-      <div class="w-full py-2 px-6">
-        <a
-          id="logout-button"
-          class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
-        >
-          Logout
-        </a>
-      </div>
-    </div>
+    </div> 
   </div>
 
   <!-- CONTAINER -->
-  <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-20 md:mt-20 lg:mt-28 mb-8 lg:mb-12">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl mb-8 md:mb-8 lg:mb-10">
+  <div class="flex flex-col w-full mx-auto max-lg:max-w-screen-md max-w-screen-xl mt-20 md:mt-24 lg:mt-32 mb-8 lg:mb-12 px-3 md:px-4">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl my-6 md:my-8 lg:my-10 ">
       Home
     </h1>
 
     <!-- WRAPPER FOR COUNTDOWN AND NEWS -->
-    <div class="flex flex-row lg:flex-row gap-6">
+    <div class="flex flex-col lg:flex-row gap-6">
       <!-- COUNTDOWN CONTAINER -->
-      <div class="w-1/2">
-      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 lg:mb-0 flex-1">
-        <h1 class="text-xl md:text-3xl lg:text-4xl mb-8">
-          Join the future and become a citizen of Axis
-        </h1>
-        <div class="">
-          <p class="text-lg font-medium text-gray-700">You have until:</p>
-          <div id="countdown" class="text-xl md:text-2xl lg:text-3xl text-blue-600"></div>
+      <div class="lg:w-1/2">
+        <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 lg:mb-0 flex-1">
+          <h1 class="text-xl md:text-3xl lg:text-4xl mb-8">
+            Join the future and become a citizen of Axis
+          </h1>
+          <div class="">
+            <p class="text-lg font-medium text-gray-700">You have until:</p>
+            <div id="countdown" class="text-xl md:text-2xl lg:text-3xl text-blue-600"></div>
+          </div>
+          <a href="/form-n205812947.html">
+            <button
+              type="submit"
+              class="mt-12 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+              hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm"
+            >
+              Form
+            </button>
+          </a>
         </div>
-        <a href="/form-n205812947.html">
-          <button
-            type="submit"
-            class="mt-12 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
-            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
-          >
-            Form
-          </button>
-        </a>
-      </div>
-      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mt-6 mb-6 lg:mb-0 flex-1">
-        <h1 class="text-xl md:text-3xl lg:text-4xl">
-          New Law Incoming!
-        </h1>
-        <p class="font-light opacity-80">You must wait until 19 of December to see the new law of Axis</p>
-        <a>
-          <button
-            type="submit"
-            class="mt-6 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
-            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
-          >
-            Not available yet
-          </button>
-        </a>
-      </div>
+        <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mt-6 mb-6 lg:mb-0 flex-1">
+          <h1 class="text-xl md:text-3xl lg:text-4xl">
+            New Law Incoming!
+          </h1>
+          <p class="font-light opacity-80">You must wait until 19 of December to see the new law of Axis</p>
+          <a>
+            <button
+              type="submit"
+              class="mt-6 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+              hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm"
+            >
+              Not available yet
+            </button>
+          </a>
+        </div>
       </div>
       <!-- NEWS CONTAINER -->
       <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md space-y-12 flex-1">

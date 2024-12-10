@@ -90,7 +90,7 @@
       </script>
 </head>
 <!-- <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%"> -->
-<body x-data="{ modalOpen: true }" x-bind:class="{ 'overflow-hidden': modalOpen }" class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
+<body x-data="{ modalOpen: false }" x-bind:class="{ 'overflow-hidden': modalOpen }" class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
  
 
@@ -176,7 +176,7 @@
 
 
     <!-- FROM -->
-    <div class="container flex max-md:flex-col items-start m-auto gap-1 p-3 mt-36 md:mt-40 lg:mt-48 w-full max-w-screen-lg">
+    <div class="container flex max-md:flex-col items-start m-auto gap-1 p-3 mt-20 md:mt-24 lg:mt-32 w-full max-w-screen-lg px-3 md:px-4">
 
         <div class="canvas-container flex sticky top-24 md:top-28 max-md:w-full items-center justify-center mx-auto lg:mx-4 max-md:mb-4 max-md:z-40 p-6 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
             <!-- <div class="absolute flex w-full h-full p-8 z-10 text-white font-mono">
@@ -467,16 +467,48 @@
                 </div>
 
 
-                <div class="">
-                    <button 
-                    id="finish-form"
-                    onclick="downloadCanvas(); saveFormResponses();"
-                    class="py-1 px-3 border border-black rounded-full hover:border-blue-500
-                    hover:text-blue-500 transition-colors"
+                <div class="flex p-6 space-x-6 justify-between border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md">
+                    <div class="flex space-x-6">
+                        <div class="">
+                            <button 
+                            id="finish-form"
+                            onclick="saveFormResponses(); toggleCheckmark();"
+                            class="flex group px-4 py-2 bg-transparent border border-gray-300 rounded-lg bg-white
+                            hover:border-green-500 hover:text-white hover:bg-green-500 transition-colors shadow-sm"
+                            >
+                            Save
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                viewBox="0 0 17.837 17.837" xml:space="preserve"
+                                class="checkmark w-5 h-5 fill-green-500 group-hover:fill-white transform transition-transform duration-300 mt-[2px] ml-2 hidden"
+                                >
+                            <g>
+                                <path d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27
+                                    c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0
+                                    L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"/>
+                            </g>
+                            </svg>
+                            </button>
+                        </div>
+                        <div class="">
+                            <button 
+                            id="finish-form"
+                            onclick="downloadCanvas();"
+                            class="px-4 py-2 bg-transparent border border-gray-300 rounded-lg bg-white
+                            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm"
+                            >
+                            Download
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="/index.html"  
+                    class=" px-4 py-2 bg-transparent border border-gray-300 rounded-lg bg-white 
+                    hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors shadow-sm"
                     >
-                    Finished
-                    </button>
+                        Home
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
@@ -598,6 +630,13 @@
                 updateScore(questionName);
             });
         });
+
+        function toggleCheckmark() {
+            const checkmarkIcon = document.querySelector('.checkmark');
+        if (checkmarkIcon.classList.contains('hidden')) {
+            checkmarkIcon.classList.remove('hidden');
+        } 
+    }
 
     </script>
     <script src="sketch.js"></script>
