@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8" class=" antialiased">
+<head>
+    <meta charset="UTF-8" class="antialiased">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axis</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>    
-    <script type="module" src="app.js"></script> 
-
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+    <script type="module" src="app.js"></script>
 </head>
-<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90% ">
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
   <!-- NAV -->
   <div
@@ -31,7 +29,7 @@
       </a>
     </div>
 
-    <div class="flex items-center gap-3 text-base lg:text-xl ">
+    <div class="flex items-center gap-3 text-base lg:text-xl">
       <div>
         <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
         @click="dropdown = !dropdown">
@@ -63,7 +61,7 @@
       <div class="w-full py-2 px-6">
         <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
           Profile
-        </a>  
+        </a>
       </div>
       <div class="w-full py-2 px-6">
         <a
@@ -75,220 +73,181 @@
       </div>
     </div>
   </div>
-  
-
-  
 
   <!-- CONTAINER -->
-
   <div class="flex flex-col w-full mx-auto max-w-screen-xl mt-36 md:mt-40 lg:mt-48 mb-8 lg:mb-12">
-
     <h1 class="text-4xl md:text-5xl lg:text-6xl mb-12 md:mb-16 lg:mb-24">
       Home
     </h1>
 
-    <div>
-    <div class="flex flex-col p-6 md:p-8 lg:p-12  justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
-
-
-
-      <h1 class="text-xl md:text-3xl lg:text-4xl mb-8">
-        Join the future and become a citizen of Axis
-      </h1>
-
-      <div class="">
-        <p class="text-lg font-medium text-gray-700">You have until:</p>
-        <div id="countdown" class="text-xl md:text-2xl lg:text-3xl text-blue-600"></div>
-    </div>
-
-
-      <!-- <div class="bg-slate-400 aspect-video w-full my-4 rounded-2xl"></div> -->
-      <a href="/form-n205812947.html">
-        <button 
-          type="submit"
-          class="mt-12 px-4 py-2 bg-transparent border border-gray-300 rounded-lg 
-          hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
-        >
-          Form
-        </button>
-      </a>
-      
-    </div>
-
-
-
-    <!-- NEWS -->
-    <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 space-y-12">
-      <h1 class="text-4xl">
-        News
-      </h1>
-
-      <!-- News 1 -->
-      <a
-        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
-        >
-
-        <div class="aspect-video rounded-2xl overflow-hidden grow w-1/3">
-          <img 
-            src="assets/news/open_portal.jpg" 
-            alt="piazza" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    <!-- WRAPPER FOR COUNTDOWN AND NEWS -->
+    <div class="flex flex-row lg:flex-row gap-6">
+      <!-- COUNTDOWN CONTAINER -->
+      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6 lg:mb-0 flex-1">
+        <h1 class="text-xl md:text-3xl lg:text-4xl mb-8">
+          Join the future and become a citizen of Axis
+        </h1>
+        <div class="">
+          <p class="text-lg font-medium text-gray-700">You have until:</p>
+          <div id="countdown" class="text-xl md:text-2xl lg:text-3xl text-blue-600"></div>
+        </div>
+        <a href="/form-n205812947.html">
+          <button
+            type="submit"
+            class="mt-12 px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
           >
-        </div>
-      
-        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
-          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
-            Open Data Portal: Immediate Access to Government Information
-          </h1>
-      
-          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
-            The new open data portal launched by the government offers citizens immediate and free access to a wide range of public information. 
-            This portal includes data on budgets, infrastructure projects, healthcare services, and much more. The goal i
-            s to promote transparency and enable citizens to monitor the government's actions, fostering greater partici
-            pation and trust in public management. The portal has been designed to be intuitive and easy to use, with u
-            ser interfaces that allow for easy navigation through different data categories. Moreover, the portal offer
-            s analysis tools that enable citizens to explore data more deeply, creating custom graphs and reports. Thi
-            s not only increases transparency but also allows citizens to become active participants in the decision
-            -making process, providing feedback and suggestions based on concrete data. The government has also an
-            nounced that the portal will be constantly updated with new data, ensuring that the information is always current and relevant.
-          </p>
-      
-          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
-            Read More &rarr;
-          </span>
-        </div>
-      </a>
-   
+            Form
+          </button>
+        </a>
+      </div>
 
-      <!-- News 1 -->
-      <a 
-        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
-        >
+      <!-- NEWS CONTAINER -->
+      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md space-y-12 flex-1">
+        <h1 class="text-4xl">
+          News
+        </h1>
 
-        <div class=" aspect-video rounded-2xl overflow-hidden grow w-1/3">
-          <img 
-            src="assets/news/urban_management.jpg" 
-            alt="piazza" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        <!-- News 1 -->
+        <a
+          class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
           >
-        </div>
-      
-        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
-          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
-            How Data is Improving Urban Management
-          </h1>
-      
-          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
-            The use of Big Data is revolutionizing urban management, allowing local administrations to make more informed and effective 
-            decisions. By analyzing large volumes of data, cities can optimize services such as waste collection, traffic, 
-            and public safety. For example, traffic data analysis has enabled the reduction of travel times and improved 
-            air quality. Sensors installed on the streets collect real-time data on traffic flow, allowing authorities 
-            to intervene quickly in case of congestion or accidents. Additionally, air quality data is used to plan 
-            pollution mitigation interventions, such as tree planting or traffic restrictions in certain areas. 
-            This data-driven approach is making cities more livable and sustainable, improving the quality 
-            of life for citizens. Local administrations are also using Big Data to plan infrastructure interventions, 
-            such as road maintenance and water network management, optimizing resource use and reducing costs.
-          </p>
-      
-          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
-            Read More &rarr;
-          </span>
-        </div>
-      </a>
-   
+          <div class="aspect-video rounded-2xl overflow-hidden grow w-1/3">
+            <img
+              src="assets/news/open_portal.jpg"
+              alt="piazza"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
+            <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+              Open Data Portal: Immediate Access to Government Information
+            </h1>
+            <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+              The new open data portal launched by the government offers citizens immediate and free access to a wide range of public information.
+              This portal includes data on budgets, infrastructure projects, healthcare services, and much more. The goal i
+              s to promote transparency and enable citizens to monitor the government's actions, fostering greater partici
+              pation and trust in public management. The portal has been designed to be intuitive and easy to use, with u
+              ser interfaces that allow for easy navigation through different data categories. Moreover, the portal offer
+              s analysis tools that enable citizens to explore data more deeply, creating custom graphs and reports. Thi
+              s not only increases transparency but also allows citizens to become active participants in the decision
+              -making process, providing feedback and suggestions based on concrete data. The government has also an
+              nounced that the portal will be constantly updated with new data, ensuring that the information is always current and relevant.
+            </p>
+            <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+              Read More &rarr;
+            </span>
+          </div>
+        </a>
 
-
-      <!-- News 1 -->
-      <a 
-        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
-        >
-
-        <div class=" aspect-video rounded-2xl overflow-hidden grow w-1/3">
-          <img 
-            src="assets/news/transport.jpg" 
-            alt="piazza" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        <!-- News 2 -->
+        <a
+          class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
           >
-        </div>
-      
-        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
-          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
-            Intelligent Transport: Route Optimization Thanks to Data
-          </h1>
-      
-          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
-            Intelligent transport is transforming the way we move in cities. Thanks to the analysis of traffic data, authorities 
-            can optimize public transport routes, reduce waiting times, and improve the efficiency of the transport system. 
-            This approach is making cities more livable and sustainable. Sensors installed on the streets collect real-time data 
-            on traffic flow, allowing authorities to intervene quickly in case of congestion or accidents.
-          </p>
-      
-          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
-            Read More &rarr;
-          </span>
-        </div>
-      </a>
-   
+          <div class="aspect-video rounded-2xl overflow-hidden grow w-1/3">
+            <img
+              src="assets/news/urban_management.jpg"
+              alt="piazza"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
+            <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+              How Data is Improving Urban Management
+            </h1>
+            <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+              The use of Big Data is revolutionizing urban management, allowing local administrations to make more informed and effective
+              decisions. By analyzing large volumes of data, cities can optimize services such as waste collection, traffic,
+              and public safety. For example, traffic data analysis has enabled the reduction of travel times and improved
+              air quality. Sensors installed on the streets collect real-time data on traffic flow, allowing authorities
+              to intervene quickly in case of congestion or accidents. Additionally, air quality data is used to plan
+              pollution mitigation interventions, such as tree planting or traffic restrictions in certain areas.
+              This data-driven approach is making cities more livable and sustainable, improving the quality
+              of life for citizens. Local administrations are also using Big Data to plan infrastructure interventions,
+              such as road maintenance and water network management, optimizing resource use and reducing costs.
+            </p>
+            <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+              Read More &rarr;
+            </span>
+          </div>
+        </a>
 
-
-
-      <!-- News 1 -->
-      <a href="https://www.advmedialab.com/intelligenza-connettiva-reti-sociali-datacrazia-intervista-derrick-de-kerckhove/"
-        class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
-        >
-
-        <div class=" aspect-video rounded-2xl overflow-hidden grow w-1/3">
-          <img 
-            src="assets/news/derrick.jpg" 
-            alt="piazza" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        <!-- News 3 -->
+        <a
+          class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
           >
-        </div>
-      
-        <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
-          <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
-            Between connective intelligence, social networks and datacracy
-          </h1>
-      
-          <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
-            Datacracy is the power of data. And data is taking power in much, if not all, of our vital information. And this is 
-            because it is more efficient than our knowledge, however educated and refined. Artificial intelligence beats doctors
-             at diagnostics, architects at design, military experts at strategy, lawyers and judges at sentencing, and so on. 
-             What's more, gen AI is often better at tasks large and small than we are, such as writing a thank you or condol
-             ence card, a novel, a documented legal proposal, a thorough instant analysis of groups of hundreds or more c
-             lassified documents.
-          </p>
-      
-          <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
-            Read More &rarr;
-          </span>
-        </div>
-      </a>
+          <div class="aspect-video rounded-2xl overflow-hidden grow w-1/3">
+            <img
+              src="assets/news/transport.jpg"
+              alt="piazza"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
+            <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+              Intelligent Transport: Route Optimization Thanks to Data
+            </h1>
+            <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+              Intelligent transport is transforming the way we move in cities. Thanks to the analysis of traffic data, authorities
+              can optimize public transport routes, reduce waiting times, and improve the efficiency of the transport system.
+              This approach is making cities more livable and sustainable. Sensors installed on the streets collect real-time data
+              on traffic flow, allowing authorities to intervene quickly in case of congestion or accidents.
+            </p>
+            <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+              Read More &rarr;
+            </span>
+          </div>
+        </a>
+
+        <!-- News 4 -->
+        <a href="https://www.advmedialab.com/intelligenza-connettiva-reti-sociali-datacrazia-intervista-derrick-de-kerckhove/"
+          class="group flex flex-col md:flex-row items-center md:items-start cursor-pointer gap-6"
+          >
+          <div class="aspect-video rounded-2xl overflow-hidden grow w-1/3">
+            <img
+              src="assets/news/derrick.jpg"
+              alt="piazza"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex flex-col justify-between space-y-4 w-full md:w-2/3 lg:w-1/2">
+            <h1 class="text-lg md:text-2xl lg:text-3xl font-semibold group-hover:text-violet-500 transition-colors">
+              Between connective intelligence, social networks and datacracy
+            </h1>
+            <p class="text-sm md:text-base text-gray-600 line-clamp-3 md:line-clamp-5 group-hover:text-gray-800 transition-colors">
+              Datacracy is the power of data. And data is taking power in much, if not all, of our vital information. And this is
+              because it is more efficient than our knowledge, however educated and refined. Artificial intelligence beats doctors
+               at diagnostics, architects at design, military experts at strategy, lawyers and judges at sentencing, and so on.
+               What's more, gen AI is often better at tasks large and small than we are, such as writing a thank you or condol
+               ence card, a novel, a documented legal proposal, a thorough instant analysis of groups of hundreds or more c
+               lassified documents.
+            </p>
+            <span class="inline-block mt-4 text-violet-500 hover:text-violet-700 font-medium transition-colors">
+              Read More &rarr;
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-
-
-    <!-- FOOTER -->
-    <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
-      <p>
-        This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
-        in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
-      </p>
-      <p>
-        We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
-        (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
-      </p>
-      <p>
-        This website is solely for university purposes and not for commercial use. It is a speculative project.
-      </p>
-      <p>
-        By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
-      </p>
-    </footer>
-      
-  </div>
-
+  <!-- FOOTER -->
+  <footer class="text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
+    <p>
+      This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course
+      in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024.
+    </p>
+    <p>
+      We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code
+      (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>).
+    </p>
+    <p>
+      This website is solely for university purposes and not for commercial use. It is a speculative project.
+    </p>
+    <p>
+      By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
+    </p>
+  </footer>
 </body>
 </html>
 
@@ -324,5 +283,5 @@
     `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
   const interval = setInterval(updateCountdown, 1000);
-  updateCountdown(); 
+  updateCountdown();
 </script>

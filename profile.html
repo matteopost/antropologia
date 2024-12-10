@@ -10,6 +10,84 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  
+      // La tua configurazione Firebase
+  const firebaseConfig = {
+  apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
+  authDomain: "datacracy-16f27.firebaseapp.com",
+  projectId: "datacracy-16f27",
+  storageBucket: "datacrazia-16f27.appspot.com",
+  messagingSenderId: "643675743445",
+  appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
+  measurementId: "G-VFQQ01LNZ4"
+};
+  
+      // Inizializza Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+  
+      async function getUserData(uid) {
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+  
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          console.log("No such document!");
+          return null;
+        }
+      }
+  
+      async function downloadCanvas() {
+        const today = getTodayDate();
+        const user = auth.currentUser;
+  
+        if (user) {
+          const uid = user.uid;
+          const userData = await getUserData(uid);
+  
+          if (userData) {
+            const nome = userData.nome || "Nome";
+            const cognome = userData.cognome || "Cognome";
+            const title = `Welcome ${nome} ${cognome} in Axis!`;
+            const borderSize = 20;
+            const cornerRadius = 10;
+  
+            let tempCanvas = createGraphics(width * 2, height * 2);
+  
+            tempCanvas.background(255);
+            tempCanvas.image(get(), borderSize, borderSize + 50, width * 2 - borderSize * 2, height * 2 - borderSize * 2 - 50);
+  
+            tempCanvas.fill(0);
+            tempCanvas.textSize(18);
+            tempCanvas.textAlign(CENTER, TOP);
+            tempCanvas.text(title, width, borderSize + 10);
+  
+            save(tempCanvas, `AXIS - ${today} - ${uid}.png`);
+          } else {
+            console.log("Failed to retrieve user data from Firebase.");
+          }
+        } else {
+          console.log("No user is logged in.");
+        }
+      }
+  
+      function getTodayDate() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        return `${day}/${month}/${year}`;
+      }
+  
+      // Espone la funzione downloadCanvas nel contesto globale
+      window.downloadCanvas = downloadCanvas;
+    </script>
 </head>
 <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
@@ -81,16 +159,22 @@
       </h1>
 
 
-      <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
-        <div id="profile-info"  class="flex flex-col items-center justify-center">
+      <div class="flex flex-row p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
+        <div id="profile-info">
             <!-- Info utente mostrate qui -->
         </div>
 
-        <div class="">
-          <div class="canvas-container flex items-center justify-center mx-4 relative"></div>
+        <div class="flex flex-col items-center justify-center">
+          <div class="canvas-container flex sticky top-24 md:top-28 max-md:w-full items-center justify-center mx-auto lg:mx-4 max-md:mb-4 max-md:z-40 p-6 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md mb-4"></div>
+          <button 
+          id="finish-form"
+          onclick="downloadCanvas();"
+          class="canvas-container flex sticky items-center justify-center px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+          hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
+          >
+          Download Passport
+          </button>
         </div>
-
-
       </div>
 
 
@@ -218,8 +302,11 @@
 
 function displayProfileInfo({ email, nome, cognome, dataNascita }) {
     document.getElementById('profile-info').innerHTML = `
-        <p class="font-normal text-base md:text-xl lg:text-xl">${nome}</p>
-        <p class="font-bold text-2xl md:text-3xl lg:text-4xl mb-4">${cognome}</p>
+    <p class="font-light text-xs md:text-sm lg:text-base mb-4">Hi, </p>
+    <p class="font-semibold text-xl md:text-xl lg:text-2xl">${nome}</p>
+    <p class="font-bold text-3xl md:text-4xl lg:text-5xl mb-24">${cognome}</p>
+    <p class="font-normal text-sm md:text-base lg:text-xl">${email}</p>
+    <p class="font-normal text-sm md:text-base lg:text-xl">${dataNascita}</p>
     `;
 }
 
