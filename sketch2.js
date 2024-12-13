@@ -104,26 +104,6 @@ function getTodayDate() {
   return `${day}/${month}/${year}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  function saveFormResponses() {
-    const responses = {};
-    let foundInputs = 0;
-
-    for (let i = 1; i <= 22; i++) {
-      const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
-      if (selectedOption) {
-        responses[`density${i}`] = selectedOption.value;
-        foundInputs++;
-      }
-    }
-    console.log(`Risposte trovate: ${foundInputs}`);
-    console.log(responses);
-  }
-
-  // Espone la funzione nel contesto globale
-  window.saveFormResponses = saveFormResponses;
-});
-
 
 function downloadCanvas() {
   const today = getTodayDate();

@@ -133,13 +133,35 @@ document.addEventListener('DOMContentLoaded', () => {
         foundInputs++;
       }
     }
+
     console.log(`Risposte trovate: ${foundInputs}`);
     console.log(responses);
+
+    // Ottieni l'ID utente autenticato
+    const userId = firebase.auth().currentUser?.uid || "anonymous-user";
+
+    // Cancella tutte le vecchie risposte e salva quelle nuove
+    const docRef = db.collection("responses").doc(userId);
+
+    // Procedura per resettare e salvare le risposte
+    docRef
+      .set({}, { merge: false }) // Resetta tutte le risposte per questo utente
+      .then(() => {
+        console.log("Vecchie risposte rimosse.");
+        return docRef.set(responses, { merge: true }); // Salva le nuove risposte
+      })
+      .then(() => {
+        console.log("Nuove risposte salvate correttamente.");
+      })
+      .catch((error) => {
+        console.error("Errore durante l'aggiornamento delle risposte:", error);
+      });
   }
 
   // Espone la funzione nel contesto globale
   window.saveFormResponses = saveFormResponses;
 });
+
 
 
 /*

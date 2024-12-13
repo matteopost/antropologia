@@ -189,7 +189,7 @@ async function saveResponses() {
     }
 
     const responses = {};
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 21; i++) {
         const value = document.querySelector(`input[name="density${i}"]:checked`);
         responses[`density${i}`] = value ? parseInt(value.value) : null;
     }
