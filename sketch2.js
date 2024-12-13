@@ -104,17 +104,25 @@ function getTodayDate() {
   return `${day}/${month}/${year}`;
 }
 
-function saveFormResponses() {
-  const responses = {};
-  // Esempio di raccolta delle risposte per ogni domanda
-  for (let i = 1; i <= 22; i++) {
-    const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
-    if (selectedOption) {
-      responses[`density${i}`] = selectedOption.value;
+document.addEventListener('DOMContentLoaded', () => {
+  function saveFormResponses() {
+    const responses = {};
+    let foundInputs = 0;
+
+    for (let i = 1; i <= 22; i++) {
+      const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
+      if (selectedOption) {
+        responses[`density${i}`] = selectedOption.value;
+        foundInputs++;
+      }
     }
+    console.log(`Risposte trovate: ${foundInputs}`);
+    console.log(responses);
   }
-  console.log(responses);  // A questo punto puoi inviare questi dati al server o salvarli dove necessario
-}
+
+  // Espone la funzione nel contesto globale
+  window.saveFormResponses = saveFormResponses;
+});
 
 
 function downloadCanvas() {
