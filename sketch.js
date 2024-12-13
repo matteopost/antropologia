@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const responses = {};
     let foundInputs = 0;
 
-    for (let i = 1; i <= 22; i++) {
+    for (let i = 1; i <= 21; i++) {
       const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
       if (selectedOption) {
         responses[`density${i}`] = selectedOption.value;
