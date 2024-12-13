@@ -107,7 +107,7 @@ function getTodayDate() {
 function saveFormResponses() {
   const responses = {};
   // Esempio di raccolta delle risposte per ogni domanda
-  for (let i = 1; i <= 21; i++) {
+  for (let i = 1; i <= 22; i++) {
     const selectedOption = document.querySelector(`input[name="density${i}"]:checked`);
     if (selectedOption) {
       responses[`density${i}`] = selectedOption.value;
