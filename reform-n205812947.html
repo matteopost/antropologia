@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axis - Reform n°205812947</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
+
+    <!-- NAV -->
+    <div
+    x-data="{ dropdown: false }"
+    class="fixed top-3 left-3 right-3 lg:top-4 lg:left-4 lg:right-4 z-50 "
+    >
+    <div class="flex justify-between items-center max-w-screen-2xl mx-auto border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md px-4 lg:px-6 py-3  ">
+        <div>
+          <a href="/index.html" class="hover:opacity-60 transition-opacity">
+            <img
+              src="./assets/svg/axis-logo.svg"
+              alt="logo axis"
+              class="h-8 lg:h-10"
+            />
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 text-base lg:text-xl">
+          <div>
+            <p class="hover:text-blue-500 transition-colors cursor-pointer text-right"
+            @click="dropdown = !dropdown">
+              Loading...
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-300 rounded-full w-10 h-10 font-light text-slate-100 flex items-center justify-center cursor-pointer"
+            id="user-avatar"
+            @click="dropdown = !dropdown"
+          >
+            <p class="text-lg font-medium"></p>
+          </div>
+        </div>
+
+        <div
+          class="absolute top-20 right-0 w-40 z-50 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md divide-y divide-gray-300"
+          x-show="dropdown"
+          x-cloak
+          @click.away="dropdown = false"
+          x-transition:enter="transition ease-out duration-200"
+          x-transition:enter-start="opacity-50 transform scale-95"
+          x-transition:enter-end="opacity-100 transform scale-100"
+          x-transition:leave="transition ease-in duration-200"
+          x-transition:leave-start="opacity-100 transform scale-100"
+          x-transition:leave-end="opacity-50 transform scale-95"
+        >
+          <div class="w-full py-2 px-6">
+            <a href="/profile.html" class="hover:text-blue-500 transition-colors cursor-pointer">
+              Profile
+            </a>
+          </div>
+          <div class="w-full py-2 px-6">
+            <a
+              id="logout-button"
+              class="text-red-400 hover:text-red-600 transition-colors cursor-pointer"
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+  
+    <div class="flex flex-col w-full mx-auto max-w-screen-lg mt-20 md:mt-24 lg:mt-32 mb-8 lg:mb-12 px-3 md:px-4">
+
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl my-6 md:my-8 lg:my-10 font-light">
+            Reform n°205812947
+        </h1>
+
+
+        <div class="flex flex-col p-6 md:p-8 lg:p-12 justify-between border-white border bg-white/30 backdrop-blur-lg rounded-2xl shadow-md mb-6">
+            <div class="flex flex-col items-center justify-center max-md:mt-12 w-full">
+                <div class="canvas-container flex items-center w-full md:w-2/3 lg:w-1/2 justify-center mx-auto lg:mx-4 max-md:mb-4 max-md:z-40 p-6 border-white border bg-white/50 backdrop-blur-lg rounded-2xl shadow-md mb-4"></div>
+            <!-- <button 
+            id="finish-form"
+            class="flex items-center justify-center px-4 py-2 bg-transparent border border-gray-300 rounded-lg
+            hover:border-violet-500 hover:text-white hover:bg-violet-500 transition-colors"
+            >
+            Download Passport
+            </button> -->
+            </div>
+            <div class="flex flex-col w-full mt-12">
+                <p class="text-sm md:text-base lg:text-lg">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <br>
+                <p class="text-sm md:text-base lg:text-lg">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <br>
+                <p class="text-sm md:text-base lg:text-lg">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <br>
+                <p class="text-sm md:text-base lg:text-lg">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <br>
+            </div>
+        </div>
+
+
+
+
+      <!-- FOOTER -->
+      <footer class=" text-gray-400 text-xs text-center p-4 my-12 border-t border-gray-400 max-w-screen-lg mx-auto">
+        <p>
+            This is a university project about <strong>Datacracy</strong> for the Anthropology of Media course 
+            in the MA of Communication Design at the <strong>Politecnico of Milano</strong>, 2024. 
+        </p>
+        <p>
+            We do not own the rights to the font nor the original idea of the <strong>p5.js</strong> code 
+            (credits go to <strong>Jeff Jones</strong> and <strong>Patt Vira</strong>). 
+        </p>
+        <p>
+            This website is solely for university purposes and not for commercial use. It is a speculative project.
+        </p>
+        <p>
+            By staying on this website, you agree to the use of cookies and the <a href="/terms.html" class="underline hover:text-blue-500">terms and conditions</a>.
+        </p>
+    </footer>
+    </div>
+  
+</body>
+
+<script src="sketch3.js"></script>
+</html>
