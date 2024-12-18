@@ -1,7 +1,7 @@
 let molds = [];
 let d;
 let p5Instance;
-let num = 6000; 
+let num = 1000; 
 let red = 2;
 let green = 13;
 let blue = 43;
