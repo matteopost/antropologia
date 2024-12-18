@@ -1,7 +1,7 @@
 let molds = [];
 let d;
 let p5Instance;
-let num = 1000; 
+let num = 12382; 
 let red = 2;
 let green = 13;
 let blue = 43;
@@ -14,22 +14,22 @@ function setup() {
   window.p5Instance = this;
 
   const canvasParent = document.querySelector('.canvas-container');
-  const parentWidth = canvasParent.offsetWidth * 0.9;
+  const parentWidth = canvasParent.offsetWidth - 40; 
 
-  createCanvas(parentWidth, parentWidth).parent(canvasParent);
+  createCanvas(parentWidth, parentWidth).parent(canvasParent); 
 
   angleMode(DEGREES);
   d = pixelDensity();
 
-  initializeMolds();
+  initializeMolds(); 
 }
 
 function windowResized() {
   const canvasParent = document.querySelector('.canvas-container');
-  const parentWidth = canvasParent.offsetWidth * 0.9;
+  const parentWidth = canvasParent.offsetWidth;
 
-  resizeCanvas(parentWidth, parentWidth);
-  initializeMolds();
+  resizeCanvas(parentWidth, parentWidth); 
+  initializeMolds(); 
 }
 
 
