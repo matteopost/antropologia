@@ -10,7 +10,39 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
-    <script type="module" src="app.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  
+      // La tua configurazione Firebase
+      const firebaseConfig = {
+  apiKey: "AIzaSyBhYGRUm7zDnP6GNf-nUGTxgwRvdwApnH4",
+  authDomain: "datacracy-16f27.firebaseapp.com",
+  projectId: "datacracy-16f27",
+  storageBucket: "datacrazia-16f27.appspot.com",
+  messagingSenderId: "643675743445",
+  appId: "1:643675743445:web:ada84b9922f1938eb0ee5c",
+  measurementId: "G-VFQQ01LNZ4"
+};
+  
+      // Inizializza Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+  
+      async function getUserData(uid) {
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+  
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          console.log("No such document!");
+          return null;
+        }
+      }
+      </script>
 </head>
 <body class="bg-gradient-to-b w-full h-full min-h-screen from-violet-200 from-10% via-gray-100 via-20% to-blue-200 to-90%">
 
@@ -424,4 +456,5 @@
 </body>
 
 <script src="sketch3.js"></script>
+<script type="module" src="app.js"></script>
 </html>
